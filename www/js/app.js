@@ -60,16 +60,16 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
           controller: 'DebugCtrl'
         }
       }
+    })
+    .state('tab.group-polls', {
+      url: '/polls/:groupId',
+      views: {
+        'pollit-tab': {
+          templateUrl: 'templates/group-polls.html',
+          controller: 'GroupPollsCtrl'
+        }
+      }
     });
-    // .state('tab.pet-detail', {
-    //   url: '/pet/:petId',
-    //   views: {
-    //     'pets-tab': {
-    //       templateUrl: 'templates/pet-detail.html',
-    //       controller: 'PetDetailCtrl'
-    //     }
-    //   }
-    // })
 
     // .state('tab.adopt', {
     //   url: '/adopt',

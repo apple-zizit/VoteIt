@@ -27,8 +27,13 @@ angular.module('starter.controllers', [])
 
 .controller('DebugCtrl', function($scope, $stateParams, PetService) {
     $scope.header = "debug"
-});
+})
 
+// A simple controller that shows a tapped item's data
+.controller('GroupPollsCtrl', function($scope, $stateParams, PetService) {
+  // "Pets" is a service returning mock data (services.js)
+  $scope.id = $stateParams.groupId;
+});
 
    
 
