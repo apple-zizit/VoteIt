@@ -6,3 +6,9 @@
   width: 96px;
   height: 96px;
 }
+
+/* overide inoic css */
+.item-icon-left .icon {
+	left: 3.5px;
+	font-size: 25px;
+}

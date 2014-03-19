@@ -15,6 +15,15 @@ angular.module('starter.controllers', [])
 // })
 .controller('PollitCtrl', function($scope, $stateParams, PetService) {
     $scope.header = "pollit"
+
+    $scope.rightButtons = [
+    {
+      type: 'button-outline button-light',
+      content: 'Poll It !',
+      tap: function(e) {
+      }
+    }
+  ]
 })
 
 .controller('VoteitCtrl', function($scope, $stateParams, PetService) {
