@@ -1,0 +1,20 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "homepage": "https://github.com/nabilnaffar/voteit",
+  "authors": [
+    "abenyamini <abenyamini@interwise.com>"
+  ],
+  "description": "VoteIt",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.0"
+  }
+}
