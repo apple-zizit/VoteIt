@@ -39,7 +39,7 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
         views: {
             'voteit-tab': {
                 templateUrl: 'templates/voteit.html',
-                controller: 'VoteitCtrl'
+                controller: 'VoteitNewPollCtrl'
             }
         }
     })
@@ -74,6 +74,6 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
 
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/pollit');
+    $urlRouterProvider.otherwise('/tab/voteit');
 
 });

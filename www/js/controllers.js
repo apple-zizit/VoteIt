@@ -26,8 +26,20 @@ angular.module('starter.controllers', [])
   ]
 })
 
-.controller('VoteitCtrl', function($scope, $stateParams, PetService) {
-    $scope.header = "voteit"
+.controller('VoteitNewPollCtrl', function($scope, $stateParams, PetService) {
+    //$scope.header = "voteit"
+    $scope.allowToAddChoices = true;
+    $scope.poll = {
+        question: '',
+        choices: [ { text: '' }, { text: '' }]
+    };
+
+    $scope.addChoice = function() {
+        $scope.poll.choices.push({ text: '' });
+        if ($scope.poll.choices.length >4) {
+            $scope.allowToAddChoices = false;   
+        };
+    };
 })
 
 .controller('SettingsCtrl', function($scope, $stateParams, PetService) {
