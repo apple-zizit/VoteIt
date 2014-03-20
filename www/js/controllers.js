@@ -116,7 +116,7 @@ angular.module('voteit.controllers', [])
         lat: null,
         lng: null
     },
-    radius: 300,
+    radius: 500,
     timeout: null
 }
 
@@ -143,7 +143,7 @@ angular.module('voteit.controllers', [])
   }
 
     $scope.createPoll = function () {
-
+        console.info(model);
       pollService.newPoll(model)
         .then(function(result){
             console.info(result);
