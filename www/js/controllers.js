@@ -47,14 +47,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DebugCtrl', function($scope, $stateParams, PetService) {
-    $scope.header = "debug"
-    $scope.MyChart = {
-        width: 80,
-        height: 80,
-
-    }
-
-    $scope.MyChart.options = {
+    var header = "debug"
+    
+    var options = {
         //Boolean - Whether we should show a stroke on each segment
         segmentShowStroke: true,
 
@@ -87,24 +82,39 @@ angular.module('starter.controllers', [])
     }
 
 
-    $scope.MyChart.data = [{
+    var data = [{
             value: 30,
-            color: "#F7464A"
+            label: "option1"
         }, {
             value: 50,
-            color: "#E2EAE9"
+            label: "option1"
         }, {
             value: 100,
-            color: "#D4CCC5"
+            label: "option1"
         }, {
             value: 40,
-            color: "#949FB1"
+            label: "option1"
         }, {
             value: 120,
-            color: "#4D5360"
+            label: "option1"
         }
 
     ]
+    
+    var color = ["#FF3B30","#FF9500","#4CD964","#FFCC00","#34AADC","#5856D6","#007AFF","#FF2D55","#D1EEFC","#8E8E93"];
+
+    for (var i = 0; i < data.length; i++) {
+        data[i].color = color[i];
+    };
+
+    $scope.MyChart = {
+        width: 80,
+        height: 80,
+        header: header,
+        options: options,
+        data: data
+
+    }
 })
 
 // A simple controller that shows a tapped item's data
