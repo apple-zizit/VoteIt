@@ -1,8 +1,5 @@
-angular.module('voteit.services', [])
+angular.module('voteit.services', ['ngResource'])
 
-/**
- * A simple example service that returns some data.
- */
 .service('PollsService', function() {
   // Might use a resource here that returns a JSON array
 
@@ -31,7 +28,7 @@ angular.module('voteit.services', [])
 
     ];
 
-          var oPolls = [
+    var oPolls = [
         {
              id: "1",
              question: "Dog or Cat ?",
@@ -58,6 +55,12 @@ angular.module('voteit.services', [])
     getPolls: function(groupId) {
       // Simple index lookup
       return oPolls;
+    },
+    postUserName: function(userName) {
+      // Simple index lookup
+      
     }
+
   }
 });
+

@@ -1,45 +1,44 @@
 <!--
-  This template loads for the 'tab.about' state (app.js)
+This template loads for the 'tab.about' state (app.js)
 -->
 <ion-view title="Settings screen"  >
-  <ion-content has-header="true" has-tabs="true" padding="true">
-       
-       <div class="list list-inset">
-     
+<ion-content has-header="true" has-tabs="true" padding="true">
 
-      <label class="item item-input">
-    <input type="text" placeholder="Name">
+<div class="list list-inset">
+
+
+  <label class="item item-input">
+    <input type="text" placeholder="Name" ng-model="user.userName">
   </label>
   <label class="item item-input">
     <input type="text" placeholder="Password">
   </label>
 
-
-      <button class="button button-assertive button-block">Login</button>
-    </div>
+  <button class="button button-assertive button-block" ng-click="login()">Login</button>
+</div>
 
 <div class="list">
   <div class="item item-divider">
     Groups
   </div>
-<ul class="list">
+  <ul class="list">
 
-  <li class="item item-checkbox">
-     <label class="checkbox">
-       <input type="checkbox">
-     </label>
-     Group#1
-  </li>
+    <li class="item item-checkbox">
+      <label class="checkbox">
+        <input type="checkbox">
+      </label>
+      Group#1
+    </li>
 
-<li class="item item-checkbox">
-     <label class="checkbox">
-       <input type="checkbox">
-     </label>
-     Group#2
-  </li>
+    <li class="item item-checkbox">
+      <label class="checkbox">
+        <input type="checkbox">
+      </label>
+      Group#2
+    </li>
 
-</ul>
+  </ul>
 </div>
 
-  </ion-content>
+</ion-content>
 </ion-view>

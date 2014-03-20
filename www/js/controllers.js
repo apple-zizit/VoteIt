@@ -116,6 +116,11 @@ angular.module('voteit.controllers', [])
 
 .controller('SettingsCtrl', function($scope, $stateParams) {
     $scope.header = "settings"
+
+    $scope.login = function (argument) {
+      alert('login for:' + $scope.user.userName);
+    }
+
 })
 
 .controller('DebugCtrl', function($scope, $stateParams) {
