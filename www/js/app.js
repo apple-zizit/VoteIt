@@ -29,7 +29,7 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
         views: {
             'pollit-tab': {
                 templateUrl: 'templates/pollit.html',
-                controller: 'PollitCtrl'
+                controller: 'PollGropsCtrl'
             }
         }
     })

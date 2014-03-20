@@ -13,7 +13,7 @@ angular.module('starter.controllers', [])
 //   // "Pets" is a service returning mock data (services.js)
 //   $scope.pet = PetService.get($stateParams.petId);
 // })
-.controller('PollitCtrl', function($scope, $stateParams, PetService) {
+.controller('PollGropsCtrl', function($scope, $stateParams, PetService) {
     $scope.header = "pollit"
  
     var oGrougps = [
