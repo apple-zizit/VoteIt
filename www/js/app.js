@@ -24,20 +24,20 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
     })
 
     // the pet tab has its own child nav-view and history
-    .state('tab.pollit', {
-        url: '/pollit',
+    .state('tab.groups', {
+        url: '/groups',
         views: {
-            'pollit-tab': {
+            'groups-tab': {
                 templateUrl: 'templates/polls-groups.html',
                 controller: 'PollGropsCtrl'
             }
         }
     })
 
-    .state('tab.group-polls', {
+    .state('tab.polls', {
         url: '/polls/:groupId',
         views: {
-            'pollit-tab': {
+            'groups-tab': {
                 templateUrl: 'templates/polls-in-group.html',
                 controller: 'PollsInGroupCtrl'
             }
@@ -54,29 +54,29 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
         }
     })
 
-        .state('tab.settings', {
-            url: '/settings',
-            views: {
-                'settings-tab': {
-                    templateUrl: 'templates/settings.html',
-                    controller: 'SettingsCtrl'
-                }
+    .state('tab.settings', {
+        url: '/settings',
+        views: {
+            'settings-tab': {
+                templateUrl: 'templates/settings.html',
+                controller: 'SettingsCtrl'
             }
-        })
-        .state('tab.debug', {
-            url: '/debug',
-            views: {
-                'debug-tab': {
-                    templateUrl: 'templates/debug.html',
-                    controller: 'DebugCtrl'
-                }
+        }
+    })
+    .state('tab.debug', {
+        url: '/debug',
+        views: {
+            'debug-tab': {
+                templateUrl: 'templates/debug.html',
+                controller: 'DebugCtrl'
             }
-        });
+        }
+    });
   
 
 
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/voteit');
+    $urlRouterProvider.otherwise('/tab/groups');
 
 });
