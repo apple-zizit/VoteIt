@@ -63,6 +63,13 @@ angular.module('starter.controllers', [])
     $scope.polls = oPolls;
 })
 
+.controller('PollVotesCtrl', function($scope, $stateParams, PetService) {
+    $scope.pollId = $stateParams.pollId;
+
+    $scope.pollName = "Poll name"
+})
+
+
 .controller('CreateNewPollCtrl', function($scope, $stateParams, PetService) {
     //$scope.header = "voteit" 
     $scope.allowToAddChoices = true;

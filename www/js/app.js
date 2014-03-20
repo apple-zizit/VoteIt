@@ -44,6 +44,16 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
         }
     })
 
+    .state('tab.poll-votes', {
+        url: '/poll-votes/:pollId',
+        views: {
+            'groups-tab': {
+                templateUrl: 'templates/poll-votes.html',
+                controller: 'PollVotesCtrl'
+            }
+        }
+    })    
+
     .state('tab.new-poll', {
         url: '/new-poll',
         views: {
