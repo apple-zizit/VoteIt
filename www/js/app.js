@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', 'chartjs-directive'])
+angular.module('starter', ['ionic', 'voteit.services', 'voteit.controllers', 'chartjs-directive'])
 
 
 .config(function($stateProvider, $urlRouterProvider) {

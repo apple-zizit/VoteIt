@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('voteit.controllers', [])
 
 .controller('PollGropsCtrl', function($scope, $stateParams, PollsService) {
     $scope.header = "pollit"
