@@ -1,55 +1,32 @@
-angular.module('starter.controllers', [])
+angular.module('voteit.controllers', [])
 
-
-// // A simple controller that fetches a list of data from a service
-// .controller('PetIndexCtrl', function($scope, PetService) {
-//   // "Pets" is a service returning mock data (services.js)
-//   $scope.pets = PetService.all();
-// })
-
-
-// // A simple controller that shows a tapped item's data
-// .controller('PetDetailCtrl', function($scope, $stateParams, PetService) {
-//   // "Pets" is a service returning mock data (services.js)
-//   $scope.pet = PetService.get($stateParams.petId);
-// })
-.controller('PollitCtrl', function($scope, $stateParams, PetService) {
+.controller('PollGropsCtrl', function($scope, $stateParams, PollsService) {
     $scope.header = "pollit"
 
-    $scope.rightButtons = [
-    {
-      type: 'button-outline button-light',
-      content: 'Poll It !',
-      tap: function(e) {
-      }
-    }
-  ]
+    var oGrougps = PollsService.getGroups();
+
+    $scope.groups = oGrougps;
+
 })
 
-.controller('VoteitNewPollCtrl', function($scope, $stateParams, PetService) {
-    //$scope.header = "voteit"
-    $scope.allowToAddChoices = true;
-    $scope.poll = {
-        question: '',
-        choices: [ { text: '' }, { text: '' }]
-    };
+//shows the polls related to a group
+.controller('PollsInGroupCtrl', function($scope, $stateParams, PollsService) {
+    // "Pets" is a service returning mock data (services.js)
+    $scope.groupId = $stateParams.groupId;
 
-    $scope.addChoice = function() {
-        $scope.poll.choices.push({ text: '' });
-        if ($scope.poll.choices.length >4) {
-            $scope.allowToAddChoices = false;   
-        };
-    };
+    $scope.groupName = "Group name"
+
+    var oPolls = PollsService.getPolls(5);
+
+    $scope.polls = oPolls;
 })
 
-.controller('SettingsCtrl', function($scope, $stateParams, PetService) {
-    $scope.header = "settings"
-})
+.controller('PollVotesCtrl', function($scope, $stateParams) {
+    $scope.pollId = $stateParams.pollId;
 
-.controller('DebugCtrl', function($scope, $stateParams, PetService) {
-    var header = "debug"
-    
-    var options = {
+    $scope.pollName = "Poll name"
+
+  var options = {
         //Boolean - Whether we should show a stroke on each segment
         segmentShowStroke: true,
 
@@ -62,7 +39,7 @@ angular.module('starter.controllers', [])
         //The percentage of the chart that we cut out of the middle.
         percentageInnerCutout: 50,
 
-        //Boolean - Whether we should animate the chart	
+        //Boolean - Whether we should animate the chart 
         animation: true,
 
         //Number - Amount of animation steps
@@ -114,14 +91,36 @@ angular.module('starter.controllers', [])
     $scope.MyChart = {
         width: 80,
         height: 80,
-        header: header,
         options: options,
         data: data
     }
+
 })
 
-// A simple controller that shows a tapped item's data
-.controller('GroupPollsCtrl', function($scope, $stateParams, PetService) {
-    // "Pets" is a service returning mock data (services.js)
-    $scope.id = $stateParams.groupId;
+
+.controller('CreateNewPollCtrl', function($scope, $stateParams) {
+    //$scope.header = "voteit" 
+    $scope.allowToAddChoices = true;
+    $scope.poll = {
+        question: '',
+        choices: [ { text: '' }, { text: '' }]
+    };
+
+    $scope.addChoice = function() {
+        $scope.poll.choices.push({ text: '' });
+        if ($scope.poll.choices.length >4) {
+            $scope.allowToAddChoices = false;   
+        };
+    };
+})
+
+.controller('SettingsCtrl', function($scope, $stateParams) {
+    $scope.header = "settings"
+})
+
+.controller('DebugCtrl', function($scope, $stateParams) {
+    var header = "debug"
+    
+ 
 });
+

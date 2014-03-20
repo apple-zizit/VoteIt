@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', 'chartjs-directive'])
+angular.module('starter', ['ionic', 'voteit.services', 'voteit.controllers', 'chartjs-directive'])
 
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -24,56 +24,69 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
     })
 
     // the pet tab has its own child nav-view and history
-    .state('tab.pollit', {
-        url: '/pollit',
+    .state('tab.groups', {
+        url: '/groups',
         views: {
-            'pollit-tab': {
-                templateUrl: 'templates/pollit.html',
-                controller: 'PollitCtrl'
+            'groups-tab': {
+                templateUrl: 'templates/polls-groups.html',
+                controller: 'PollGropsCtrl'
             }
         }
     })
 
-    .state('tab.voteit', {
-        url: '/voteit',
+    .state('tab.polls', {
+        url: '/polls/:groupId',
         views: {
-            'voteit-tab': {
-                templateUrl: 'templates/voteit.html',
-                controller: 'VoteitNewPollCtrl'
+            'groups-tab': {
+                templateUrl: 'templates/polls-in-group.html',
+                controller: 'PollsInGroupCtrl'
             }
         }
     })
-        .state('tab.settings', {
-            url: '/settings',
-            views: {
-                'settings-tab': {
-                    templateUrl: 'templates/settings.html',
-                    controller: 'SettingsCtrl'
-                }
+
+    .state('tab.poll-votes', {
+        url: '/poll-votes/:pollId',
+        views: {
+            'groups-tab': {
+                templateUrl: 'templates/poll-votes.html',
+                controller: 'PollVotesCtrl'
             }
-        })
-        .state('tab.debug', {
-            url: '/debug',
-            views: {
-                'debug-tab': {
-                    templateUrl: 'templates/debug.html',
-                    controller: 'DebugCtrl'
-                }
+        }
+    })    
+
+    .state('tab.new-poll', {
+        url: '/new-poll',
+        views: {
+            'new-poll-tab': {
+                templateUrl: 'templates/new-poll.html',
+                controller: 'CreateNewPollCtrl'
             }
-        })
-        .state('tab.group-polls', {
-            url: '/polls/:groupId',
-            views: {
-                'pollit-tab': {
-                    templateUrl: 'templates/group-polls.html',
-                    controller: 'GroupPollsCtrl'
-                }
+        }
+    })
+
+    .state('tab.settings', {
+        url: '/settings',
+        views: {
+            'settings-tab': {
+                templateUrl: 'templates/settings.html',
+                controller: 'SettingsCtrl'
             }
-        });
+        }
+    })
+    .state('tab.debug', {
+        url: '/debug',
+        views: {
+            'debug-tab': {
+                templateUrl: 'templates/debug.html',
+                controller: 'DebugCtrl'
+            }
+        }
+    });
+  
 
 
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/voteit');
+    $urlRouterProvider.otherwise('/tab/groups');
 
 });
