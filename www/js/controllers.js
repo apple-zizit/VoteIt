@@ -97,41 +97,89 @@ angular.module('voteit.controllers', [])
 
 })
 
+//----------------------------------------------------------------------------
+//  new poll
+//----------------------------------------------------------------------------
+.controller('CreateNewPollCtrl', function($scope, $stateParams, pollService) {
 
-.controller('CreateNewPollCtrl', function($scope, $stateParams) {
+  var model = {
+    group: null,
+    question: 'stam',
+    choices: [ { text: '' }, { text: '' }],
+    votes: [
+        {
+            userId: null,
+            choice: null
+        }
+    ],
+    center: {
+        lat: null,
+        lng: null
+    },
+    radius: 300,
+    timeout: null
+}
+
+$scope.model = model;
+
     //$scope.header = "voteit" 
     $scope.allowToAddChoices = true;
-    $scope.poll = {
-        question: '',
-        choices: [ { text: '' }, { text: '' }]
-    };
 
     $scope.addChoice = function() {
-        $scope.poll.choices.push({ text: '' });
-        if ($scope.poll.choices.length >4) {
+        model.choices.push({ text: '' });
+        if (model.choices.length >4) {
             $scope.allowToAddChoices = false;   
         };
     };
+
+         window.navigator.geolocation.getCurrentPosition(function(position) {
+            $scope.$apply(function() {
+                $scope.position = position;
+            });
+        }, function(error) {
+            alert(error);
+        });
+
+
+    $scope.createPoll = function () {
+
+      pollsService.register(model)
+        .then(function(result){
+            console.info(result);
+        }, function(err){
+            console.error(err);
+        });     
+    }
+
 })
 
+//----------------------------------------------------------------------------
+//  Settings
+//----------------------------------------------------------------------------
 .controller('SettingsCtrl', function($scope, $stateParams, usersService) {
     var model = {
       user: {
-        name: null,
-        password: null
+        username: null,
+        password: null, 
+        groups: []
       }
+
     };
+
 
     $scope.model = model;
 
-    $scope.header = "settings"
+    if (localStorage.getItem("user")) {
+        model.user.username = localStorage.getItem("user");
+    }
 
     $scope.login = function () {
-      alert('login for:' + model.user.name);
+      //alert('login for:' + model.user.name);
 
       usersService.register(model.user)
       .then(function(result){
           console.info(result);
+          localStorage.setItem("user", model.user.username);
       }, function(err){
           console.error(err);
       });

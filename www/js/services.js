@@ -81,5 +81,36 @@ angular.module('voteit.services', [], function(){})
         return deffered.promise;
       }
     }
-});
+})
+.service('pollService', function($q, $http){
+    return {
+      newPoll: function(newPoll){
+        var deffered = $q.defer();
 
+        $http.post(BASE_HTTP_API_URL + 'votes', newPoll)
+        .success(function(response){
+            deffered.resolve(response);
+        })
+        .error(function(err){
+            deffered.reject(err);
+        });
+
+        return deffered.promise;
+      }, 
+      newVote: function(newVote){
+        var deffered = $q.defer();
+
+        $http.post(BASE_HTTP_API_URL + 'votes', newVote)
+        .success(function(response){
+            deffered.resolve(response);
+        })
+        .error(function(err){
+            deffered.reject(err);
+        });
+
+        return deffered.promise;
+      }
+
+
+    }
+});
