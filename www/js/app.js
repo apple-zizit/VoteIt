@@ -44,12 +44,12 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
         }
     })
 
-    .state('tab.voteit', {
-        url: '/voteit',
+    .state('tab.new-poll', {
+        url: '/new-poll',
         views: {
-            'voteit-tab': {
-                templateUrl: 'templates/voteit.html',
-                controller: 'VoteitNewPollCtrl'
+            'new-poll-tab': {
+                templateUrl: 'templates/new-poll.html',
+                controller: 'CreateNewPollCtrl'
             }
         }
     })

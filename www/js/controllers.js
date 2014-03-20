@@ -35,7 +35,10 @@ angular.module('starter.controllers', [])
 //shows the polls related to a group
 .controller('PollsInGroupCtrl', function($scope, $stateParams, PetService) {
     // "Pets" is a service returning mock data (services.js)
-    $scope.id = $stateParams.groupId;
+    $scope.groupId = $stateParams.groupId;
+
+    $scope.groupName = "Group name"
+
 
         var oPolls = [
         {
@@ -48,13 +51,19 @@ angular.module('starter.controllers', [])
              question: "A or B ?",
              votes: "43"
         }
+        ,
+          {
+             id: "3",
+             question: "C or D ?",
+             votes: "54"
+        }
 
     ];
 
     $scope.polls = oPolls;
 })
 
-.controller('VoteitNewPollCtrl', function($scope, $stateParams, PetService) {
+.controller('CreateNewPollCtrl', function($scope, $stateParams, PetService) {
     //$scope.header = "voteit" 
     $scope.allowToAddChoices = true;
     $scope.poll = {
