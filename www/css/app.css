@@ -12,3 +12,19 @@
 	left: 3.5px;
 	font-size: 25px;
 }
+
+@font-face {
+    font-family: 'poiret_oneregular';
+    src: url('fonts/poiretone-regular-webfont.eot');
+    src: url('fonts/poiretone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/poiretone-regular-webfont.woff') format('woff'),
+         url('fonts/poiretone-regular-webfont.ttf') format('truetype'),
+         url('fonts/poiretone-regular-webfont.svg#poiret_oneregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+input, button, select, textarea, body, h1 {
+	font-family: "poiret_oneregular";
+}

@@ -89,7 +89,7 @@ angular.module('voteit.controllers', [])
     };
 
     $scope.MyChart = {
-        width: 80,
+        width: 40,
         height: 80,
         options: options,
         data: data
