@@ -120,30 +120,31 @@ angular.module('voteit.controllers', [])
     timeout: null
 }
 
-$scope.model = model;
+  $scope.model = model;
 
-    //$scope.header = "voteit" 
-    $scope.allowToAddChoices = true;
+   //$scope.header = "voteit" 
+  $scope.allowToAddChoices = true;
 
-    $scope.addChoice = function() {
-        model.choices.push({ text: '' });
-        if (model.choices.length >4) {
-            $scope.allowToAddChoices = false;   
-        };
-    };
+  $scope.addChoice = function() {
+      model.choices.push({ text: '' });
+      if (model.choices.length >4) {
+          $scope.allowToAddChoices = false;   
+      };
+  };
 
-         window.navigator.geolocation.getCurrentPosition(function(position) {
-            $scope.$apply(function() {
-                $scope.position = position;
-            });
-        }, function(error) {
-            alert(error);
-        });
-
+  if (navigator.geolocation)  {
+      navigator.geolocation.getCurrentPosition(function(position){
+        model.center.lat = position.coords.latitude;
+        model.center.lng = position.coords.longitude;
+      });
+  }
+  else {
+    console.log("Geolocation is not supported by this browser.");
+  }
 
     $scope.createPoll = function () {
 
-      pollsService.register(model)
+      pollService.newPoll(model)
         .then(function(result){
             console.info(result);
         }, function(err){

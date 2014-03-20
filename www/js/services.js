@@ -1,6 +1,6 @@
 var BASE_HTTP_API_URL = 'http://10.114.20.244:3000/api/'
 
-angular.module('voteit.services', [], function(){})
+angular.module('voteit.services', [])
 
 .service('PollsService', function() {
   // Might use a resource here that returns a JSON array
@@ -84,10 +84,23 @@ angular.module('voteit.services', [], function(){})
 })
 .service('pollService', function($q, $http){
     return {
+      getGroupsByGeoLocation: function(geoLocation){
+        var deffered = $q.defer();
+
+        $http.post(BASE_HTTP_API_URL + 'polls', newPoll)
+        .success(function(response){
+            deffered.resolve(response);
+        })
+        .error(function(err){
+            deffered.reject(err);
+        });
+
+        return deffered.promise;
+      },       
       newPoll: function(newPoll){
         var deffered = $q.defer();
 
-        $http.post(BASE_HTTP_API_URL + 'votes', newPoll)
+        $http.post(BASE_HTTP_API_URL + 'polls', newPoll)
         .success(function(response){
             deffered.resolve(response);
         })
@@ -97,10 +110,10 @@ angular.module('voteit.services', [], function(){})
 
         return deffered.promise;
       }, 
-      newVote: function(newVote){
+      vote: function(vote){
         var deffered = $q.defer();
 
-        $http.post(BASE_HTTP_API_URL + 'votes', newVote)
+        $http.post(BASE_HTTP_API_URL + 'polls/vote', newVote)
         .success(function(response){
             deffered.resolve(response);
         })
