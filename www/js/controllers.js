@@ -28,12 +28,10 @@ angular.module('voteit.controllers', [])
 //shows the polls related to a group
 .controller('PollsInGroupCtrl', function($scope, $stateParams, MockService) {
     // "Pets" is a service returning mock data (services.js)
-    $scope.groupId = $stateParams.groupId;
-
-    $scope.groupName = "Group name"
+    $scope.groupName = $stateParams.groupName;
 
    if (MOCK_MODE) {
-        $scope.polls = MockService.getPolls(5);
+        $scope.polls = MockService.getPolls($scope.groupName);
     }
     else {
         pollService.getPolls(center)
@@ -42,7 +40,7 @@ angular.module('voteit.controllers', [])
             $scope.groups = result;
         }, function(err){
             console.error(err);
-            $scope.polls = MockService.getPolls(5);
+            $scope.polls = MockService.getPolls($scope.groupName);
         });     
     }
 

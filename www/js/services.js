@@ -7,7 +7,7 @@ angular.module('voteit.services', [])
         start: function(){
           activateLocationService();
           $rootScope.stopTime = $interval(activateLocationService, 10000);
-          console.log("test !!!!!!!!!!!!!!!!!" + $rootScope.stopTime);
+          //console.log("test !!!!!!!!!!!!!!!!!" + $rootScope.stopTime);
         }
       };
         function activateLocationService() {
@@ -66,12 +66,46 @@ angular.module('voteit.services', [])
       {
         "name": "VoteIt team",
         "pollsCount": 52,
-        "category": "ion-beer"
+        "category": "ion-beer",
+        "polls" : [
+        {
+             id: "1",
+             question: "Should we limit the radius ?",
+             votes: "7"
+        },
+          {
+             id: "2",
+             question: "UI Theme, Red or Green",
+             votes: "23"
+        }
+        ,
+          {
+             id: "3",
+             question: "Android or IOS ?",
+             votes: "12"
+        }]
       },
       {
         "name": "Ninja Coders",
         "pollsCount": 23,
-        "category": "ion-social-tux"
+        "category": "ion-social-tux",
+         "polls" : [
+          {
+               id: "1",
+               question: "Which framework is the best",
+               votes: "7"
+          },
+            {
+               id: "2",
+               question: "Question 2",
+               votes: "23"
+          }
+          ,
+            {
+               id: "3",
+               question: "Another Question",
+               votes: "12"
+          }]        
       },
       {
         "name": "Mobility Inovation",
@@ -79,35 +113,23 @@ angular.module('voteit.services', [])
         "category": "ion-speakerphone"
       }
     ];
-
-
-    var oPolls = [
-        {
-             id: "1",
-             question: "Dog or Cat ?",
-             votes: "23"
-        },
-          {
-             id: "2",
-             question: "A or B ?",
-             votes: "43"
-        }
-        ,
-          {
-             id: "3",
-             question: "C or D ?",
-             votes: "54"
-        }
-
-    ];
+  
 
   return {
     getGroups: function() {
       return oGrougps;
     },
-    getPolls: function(groupId) {
-      // Simple index lookup
-      return oPolls;
+    getPolls: function(groupName) {
+   
+      var polls = null;
+      for (var i = 0; i < oGrougps.length; i++) {
+        if (oGrougps[i].name===groupName) {
+            polls = oGrougps[i].polls;
+            break;
+        };
+      };
+  
+      return polls;
     },
     postUserName: function(userName) {
       // Simple index lookup

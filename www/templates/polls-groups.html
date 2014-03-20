@@ -8,7 +8,7 @@
     Active Groups
   </div>
 
-  <a class="item item-icon-left" href="#/tab/polls/{{group.pollId}}" ng-repeat="group in groups">
+  <a class="item item-icon-left" href="#/tab/polls/{{group.name}}" ng-repeat="group in groups">
     <i class="icon {{group.category}}"></i>
     {{group.name}}
     <span class="badge badge-assertive">{{group.pollsCount}}</span>

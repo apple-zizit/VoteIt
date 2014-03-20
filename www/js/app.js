@@ -35,7 +35,7 @@ angular.module('starter', ['ionic', 'voteit.services', 'voteit.controllers', 'ch
     })
 
     .state('tab.polls', {
-        url: '/polls/:groupId',
+        url: '/polls/:groupName',
         views: {
             'groups-tab': {
                 templateUrl: 'templates/polls-in-group.html',
