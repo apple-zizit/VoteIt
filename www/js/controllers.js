@@ -208,16 +208,40 @@ angular.module('voteit.controllers', [])
 
 })
 
-.controller('DebugCtrl', function($scope, $stateParams, locationService) {
-    // var header = "debug"
-    //     var header = "debug"
+.controller('DebugCtrl', function($scope, $stateParams, $ionicModal, $state, locationService) {
+    // Load the modal from the given template URL
+      $ionicModal.fromTemplateUrl('templates/newPollModal.html', function(modal) {
+        $scope.modal = modal;
+      }, {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope,
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+      });
 
-    //     function updateLocationService() {
-    //         $scope.thePosition = $rootScope.currentLocation;
+      // Test data
+      $scope.contacts = [
+        { name: 'Gordon Freeman' },
+        { name: 'Barney Calhoun' },
+        { name: 'Lamarr the Headcrab' }
+      ];
 
-    //     };
-    // $rootScope.stopTime = $interval(updateLocationService, 1000);
-    // console.log("test !!!!!!!!!!!!!!!!!" + $rootScope.stopTime);
+      $scope.openModal = function() {
+        $scope.modal.show();
+      };
+      $scope.closeModal = function() {
+        $scope.modal.hide();
+      };
+
+      $scope.vote = function() {
+        $scope.modal.hide();
+        $state.go('tab.poll-votes');
+      };
+
+      //Be sure to cleanup the modal
+      $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+      });
  
 });
 
