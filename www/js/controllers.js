@@ -84,7 +84,7 @@ angular.module('starter.controllers', [])
 
     var data = [{
             value: 30,
-            label: "option1"
+            label: "bla bla"
         }, {
             value: 50,
             label: "option1"
@@ -97,6 +97,9 @@ angular.module('starter.controllers', [])
         }, {
             value: 120,
             label: "option1"
+        }, {
+            value: 120,
+            label: "option1"
         }
 
     ]
@@ -105,6 +108,7 @@ angular.module('starter.controllers', [])
 
     for (var i = 0; i < data.length; i++) {
         data[i].color = color[i];
+        data[i].legend = "Option " + i+1;
     };
 
     $scope.MyChart = {
@@ -113,7 +117,6 @@ angular.module('starter.controllers', [])
         header: header,
         options: options,
         data: data
-
     }
 })
 
