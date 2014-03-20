@@ -15,15 +15,35 @@ angular.module('starter.controllers', [])
 // })
 .controller('PollitCtrl', function($scope, $stateParams, PetService) {
     $scope.header = "pollit"
+ 
+    var oGrougps = [
+        {
+             id: "1",
+             name: "gourp 1",
+             type: "ion-person-stalker",
+             pollsCount: "32"
 
-    $scope.rightButtons = [
-    {
-      type: 'button-outline button-light',
-      content: 'Poll It !',
-      tap: function(e) {
-      }
-    }
-  ]
+        },
+        {
+             id: "2",
+             name: "gourp 2",
+             type: "ion-beer",
+             pollsCount: "15"
+
+        },
+        {
+             id: "3",
+             name: "gourp 3",
+             type: "ion-ios7-world-outline",
+             pollsCount: "3"
+
+        }
+
+    ];
+
+    $scope.groups = oGrougps;
+
+
 })
 
 .controller('VoteitNewPollCtrl', function($scope, $stateParams, PetService) {
