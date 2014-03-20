@@ -114,11 +114,27 @@ angular.module('voteit.controllers', [])
     };
 })
 
-.controller('SettingsCtrl', function($scope, $stateParams) {
+.controller('SettingsCtrl', function($scope, $stateParams, usersService) {
+    var model = {
+      user: {
+        name: null,
+        password: null
+      }
+    };
+
+    $scope.model = model;
+
     $scope.header = "settings"
 
-    $scope.login = function (argument) {
-      alert('login for:' + $scope.user.userName);
+    $scope.login = function () {
+      alert('login for:' + model.user.name);
+
+      usersService.register(model.user)
+      .then(function(result){
+          console.info(result);
+      }, function(err){
+          console.error(err);
+      });
     }
 
 })

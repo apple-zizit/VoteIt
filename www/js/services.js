@@ -1,4 +1,6 @@
-angular.module('voteit.services', ['ngResource'])
+var BASE_HTTP_API_URL = 'http://10.114.20.244:3000/api/'
+
+angular.module('voteit.services', [], function(){})
 
 .service('PollsService', function() {
   // Might use a resource here that returns a JSON array
@@ -62,5 +64,22 @@ angular.module('voteit.services', ['ngResource'])
     }
 
   }
+})
+.service('usersService', function($q, $http){
+    return {
+      register: function(user){
+        var deffered = $q.defer();
+
+        $http.post(BASE_HTTP_API_URL + 'users', user)
+        .success(function(response){
+            deffered.resolve(response);
+        })
+        .error(function(err){
+            deffered.reject(err);
+        });
+
+        return deffered.promise;
+      }
+    }
 });
 

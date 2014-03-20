@@ -8,10 +8,10 @@ This template loads for the 'tab.about' state (app.js)
 
 
   <label class="item item-input">
-    <input type="text" placeholder="Name" ng-model="user.userName">
+    <input type="text" placeholder="Name" ng-model="model.user.name">
   </label>
   <label class="item item-input">
-    <input type="text" placeholder="Password">
+    <input type="text" placeholder="Password" ng-model="model.user.password">
   </label>
 
   <button class="button button-assertive button-block" ng-click="login()">Login</button>
