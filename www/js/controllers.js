@@ -1,64 +1,22 @@
 angular.module('starter.controllers', [])
 
-.controller('PollGropsCtrl', function($scope, $stateParams) {
+.controller('PollGropsCtrl', function($scope, $stateParams, PollsService) {
     $scope.header = "pollit"
- 
-    var oGrougps = [
-        {
-             id: "1",
-             name: "gourp 1",
-             type: "ion-person-stalker",
-             pollsCount: "32"
 
-        },
-        {
-             id: "2",
-             name: "gourp 2",
-             type: "ion-beer",
-             pollsCount: "15"
-
-        },
-        {
-             id: "3",
-             name: "gourp 3",
-             type: "ion-ios7-world-outline",
-             pollsCount: "3"
-
-        }
-
-    ];
+    var oGrougps = PollsService.getGroups();
 
     $scope.groups = oGrougps;
 
 })
 
 //shows the polls related to a group
-.controller('PollsInGroupCtrl', function($scope, $stateParams) {
+.controller('PollsInGroupCtrl', function($scope, $stateParams, PollsService) {
     // "Pets" is a service returning mock data (services.js)
     $scope.groupId = $stateParams.groupId;
 
     $scope.groupName = "Group name"
 
-
-        var oPolls = [
-        {
-             id: "1",
-             question: "Dog or Cat ?",
-             votes: "23"
-        },
-          {
-             id: "2",
-             question: "A or B ?",
-             votes: "43"
-        }
-        ,
-          {
-             id: "3",
-             question: "C or D ?",
-             votes: "54"
-        }
-
-    ];
+    var oPolls = PollsService.getPolls(5);
 
     $scope.polls = oPolls;
 })

@@ -3,24 +3,61 @@ angular.module('starter.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('PetService', function() {
+.service('PollsService', function() {
   // Might use a resource here that returns a JSON array
 
-  // Some fake testing data
-  var pets = [
-    { id: 0, title: 'Cats', description: 'Furry little creatures. Obsessed with plotting assassination, but never following through on it.' },
-    { id: 1, title: 'Dogs', description: 'Lovable. Loyal almost to a fault. Smarter than they let on.' },
-    { id: 2, title: 'Turtles', description: 'Everyone likes turtles.' },
-    { id: 3, title: 'Sharks', description: 'An advanced pet. Needs millions of gallons of salt water. Will happily eat you.' }
-  ];
+   var oGrougps = [
+        {
+             id: "1",
+             name: "gourp 1",
+             type: "ion-person-stalker",
+             pollsCount: "32"
+
+        },
+        {
+             id: "2",
+             name: "gourp 2",
+             type: "ion-beer",
+             pollsCount: "15"
+
+        },
+        {
+             id: "3",
+             name: "gourp 3",
+             type: "ion-ios7-world-outline",
+             pollsCount: "3"
+
+        }
+
+    ];
+
+          var oPolls = [
+        {
+             id: "1",
+             question: "Dog or Cat ?",
+             votes: "23"
+        },
+          {
+             id: "2",
+             question: "A or B ?",
+             votes: "43"
+        }
+        ,
+          {
+             id: "3",
+             question: "C or D ?",
+             votes: "54"
+        }
+
+    ];
 
   return {
-    all: function() {
-      return pets;
+    getGroups: function() {
+      return oGrougps;
     },
-    get: function(petId) {
+    getPolls: function(groupId) {
       // Simple index lookup
-      return pets[petId];
+      return oPolls;
     }
   }
 });
