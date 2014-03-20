@@ -198,9 +198,16 @@ angular.module('voteit.controllers', [])
 
 })
 
-.controller('DebugCtrl', function($scope, $stateParams) {
-    var header = "debug"
-    
+.controller('DebugCtrl', function($scope, $stateParams, locationService) {
+    // var header = "debug"
+    //     var header = "debug"
+
+    //     function updateLocationService() {
+    //         $scope.thePosition = $rootScope.currentLocation;
+
+    //     };
+    // $rootScope.stopTime = $interval(updateLocationService, 1000);
+    // console.log("test !!!!!!!!!!!!!!!!!" + $rootScope.stopTime);
  
 });
 

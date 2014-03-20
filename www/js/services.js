@@ -1,34 +1,67 @@
 var BASE_HTTP_API_URL = 'http://10.114.20.244:3000/api/'
 
 angular.module('voteit.services', [])
+.service('locationService', function($rootScope, $interval) {
 
-.service('PollsService', function() {
-  // Might use a resource here that returns a JSON array
+      return {
+        start: function(){
+          activateLocationService();
+          $rootScope.stopTime = $interval(activateLocationService, 10000);
+          console.log("test !!!!!!!!!!!!!!!!!" + $rootScope.stopTime);
+        }
+      };
+        function activateLocationService() {
 
-   var oGrougps = [
-        {
-             id: "1",
-             name: "gourp 1",
-             type: "ion-person-stalker",
-             pollsCount: "32"
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendPosition, showError, {
+                    maximumAge: 75000
+                });
+            } else {
+                $rootScope.errorMsg = "Geolocation is not supported by this browser.";
+            }
 
-        },
-        {
-             id: "2",
-             name: "gourp 2",
-             type: "ion-beer",
-             pollsCount: "15"
 
-        },
-        {
-             id: "3",
-             name: "gourp 3",
-             type: "ion-ios7-world-outline",
-             pollsCount: "3"
+
+            function sendPosition(position) {
+
+                $rootScope.currentLocation = position.coords;
+
+                $rootScope.serverMsg = "Latitude=" + position.coords.latitude +
+                    "Longitude=" + position.coords.longitude;
+                //send http post with the parmaters  
+                //    $http.post('/someUrl', $rootScope.serverMsg).success(successCallback);
+            }
+
+            function successCallback() {
+
+            }
+
+            function showError(error) {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        $rootScope.errorMsg = "User denied the request for Geolocation."
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        $rootScope.errorMsg = "Location information is unavailable."
+                        break;
+                    case error.TIMEOUT:
+                        $rootScope.errorMsg = "The request to get user location timed out."
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        $rootScope.errorMsg = "An unknown error occurred."
+                        break;
+                }
+            }
+
+
 
         }
 
-    ];
+        
+    })
+.service('PollsService', function() {
+  // Might use a resource here that returns a JSON array
+
 
     var oPolls = [
         {

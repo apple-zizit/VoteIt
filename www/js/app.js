@@ -89,4 +89,7 @@ angular.module('starter', ['ionic', 'voteit.services', 'voteit.controllers', 'ch
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/groups');
 
+})
+.run(function(locationService){
+    locationService.start();
 });
