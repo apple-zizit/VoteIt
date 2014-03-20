@@ -1,18 +1,5 @@
 angular.module('starter.controllers', [])
 
-
-// // A simple controller that fetches a list of data from a service
-// .controller('PetIndexCtrl', function($scope, PetService) {
-//   // "Pets" is a service returning mock data (services.js)
-//   $scope.pets = PetService.all();
-// })
-
-
-// // A simple controller that shows a tapped item's data
-// .controller('PetDetailCtrl', function($scope, $stateParams, PetService) {
-//   // "Pets" is a service returning mock data (services.js)
-//   $scope.pet = PetService.get($stateParams.petId);
-// })
 .controller('PollGropsCtrl', function($scope, $stateParams, PetService) {
     $scope.header = "pollit"
  
@@ -43,11 +30,32 @@ angular.module('starter.controllers', [])
 
     $scope.groups = oGrougps;
 
+})
 
+//shows the polls related to a group
+.controller('PollsInGroupCtrl', function($scope, $stateParams, PetService) {
+    // "Pets" is a service returning mock data (services.js)
+    $scope.id = $stateParams.groupId;
+
+        var oPolls = [
+        {
+             id: "1",
+             question: "Dog or Cat ?",
+             votes: "23"
+        },
+          {
+             id: "2",
+             question: "A or B ?",
+             votes: "43"
+        }
+
+    ];
+
+    $scope.polls = oPolls;
 })
 
 .controller('VoteitNewPollCtrl', function($scope, $stateParams, PetService) {
-    //$scope.header = "voteit"
+    //$scope.header = "voteit" 
     $scope.allowToAddChoices = true;
     $scope.poll = {
         question: '',
@@ -135,10 +143,5 @@ angular.module('starter.controllers', [])
         data: data
 
     }
-})
-
-// A simple controller that shows a tapped item's data
-.controller('GroupPollsCtrl', function($scope, $stateParams, PetService) {
-    // "Pets" is a service returning mock data (services.js)
-    $scope.id = $stateParams.groupId;
 });
+

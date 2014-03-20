@@ -9,16 +9,10 @@
     
 <div class="list">
 
-  <a class="item" href="#">
-    poll1
-     <span class="badge badge-assertive">10</span>
+  <a class="item" href="#" ng-repeat="poll in polls">
+    {{poll.question}}
+     <span class="badge badge-assertive">{{poll.votes}}</span>
   </a>
-
-   <a class="item" href="#">
-    poll2
-    <span class="badge badge-assertive">3</span>
-  </a>
-
 
 </div>
 

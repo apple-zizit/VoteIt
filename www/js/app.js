@@ -34,6 +34,16 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
         }
     })
 
+    .state('tab.group-polls', {
+        url: '/polls/:groupId',
+        views: {
+            'pollit-tab': {
+                templateUrl: 'templates/polls-in-group.html',
+                controller: 'PollsInGroupCtrl'
+            }
+        }
+    })
+
     .state('tab.voteit', {
         url: '/voteit',
         views: {
@@ -43,6 +53,7 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
             }
         }
     })
+
         .state('tab.settings', {
             url: '/settings',
             views: {
@@ -60,16 +71,8 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
                     controller: 'DebugCtrl'
                 }
             }
-        })
-        .state('tab.group-polls', {
-            url: '/polls/:groupId',
-            views: {
-                'pollit-tab': {
-                    templateUrl: 'templates/group-polls.html',
-                    controller: 'GroupPollsCtrl'
-                }
-            }
         });
+  
 
 
 

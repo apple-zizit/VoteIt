@@ -1,0 +1,35 @@
+<!-- 
+This template gets placed in the Pet tab's <ion-nav-view> directive.
+It was wired up in the app config (app.js) 
+The 'pets' data comes from its $scope within PetIndexCtrl (controller.js)
+-->
+<ion-view title="VoteIt !">
+<ion-content has-header="true" has-tabs="true">
+
+<div class="list list-inset">
+   <div class="item item-divider">
+    Question
+  </div>
+  <label class="item item-input">
+    <input type="text" placeholder="Enter poll question">
+  </label>
+</div>
+<div class="list list-inset">
+   <div class="item item-divider">
+    Choices
+  </div>
+  <label class="item item-input" ng-repeat="choice in poll.choices">
+    <input type="text" placeholder="Enter choice {{$index+1}} text">
+  </label>
+  <button class="button icon ion-plus" ng-click="addChoice()" ng-show="allowToAddChoices"></button>
+  <div class="range">
+    <i class="icon ion-ios7-minus-empty"></i>
+    <input type="range" name="volume">
+    <i class="icon ion-ios7-plus-empty"></i>
+  </div>
+  <button class="button button-assertive">Create Poll &raquo;</button>
+</div>
+
+
+</ion-content>
+</ion-view>
