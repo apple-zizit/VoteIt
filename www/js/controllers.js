@@ -1,11 +1,20 @@
 angular.module('voteit.controllers', [])
 
-.controller('PollGropsCtrl', function($scope, $stateParams, PollsService) {
+.controller('PollGropsCtrl', function($scope, $stateParams, pollService) {
     $scope.header = "pollit"
 
-    var oGrougps = PollsService.getGroups();
+    var  center =  {
+        lat: '30.2342342343',
+        lng: '79.2343243434'
+    };
 
-    $scope.groups = oGrougps;
+    pollService.getGroupsByGeoLocation(center)
+    .then(function(result){
+        console.info(result);
+        $scope.groups = result;
+    }, function(err){
+        console.error(err);
+    });     
 
 })
 
@@ -104,6 +113,7 @@ angular.module('voteit.controllers', [])
 
   var model = {
     group: null,
+    category: 'ion-beer',
     question: 'stam',
     choices: [ { text: '' }, { text: '' }],
     votes: [

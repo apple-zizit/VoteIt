@@ -84,10 +84,11 @@ angular.module('voteit.services', [])
 })
 .service('pollService', function($q, $http){
     return {
-      getGroupsByGeoLocation: function(geoLocation){
+      getGroupsByGeoLocation: function(center){
         var deffered = $q.defer();
-
-        $http.post(BASE_HTTP_API_URL + 'polls', newPoll)
+        //http://localhost:3000/api/groups/30.2342342343,79.2343243434
+        //$http.get(BASE_HTTP_API_URL + 'groups/30.2342342343,79.2343243434')
+        $http.get(BASE_HTTP_API_URL + 'groups/' + center.lat + ',' + center.lng)
         .success(function(response){
             deffered.resolve(response);
         })
