@@ -59,8 +59,26 @@ angular.module('voteit.services', [])
 
         
     })
-.service('PollsService', function() {
+.service('MockService', function() {
   // Might use a resource here that returns a JSON array
+
+    var oGrougps = [
+      {
+        "name": "VoteIt team",
+        "pollsCount": 52,
+        "category": "ion-beer"
+      },
+      {
+        "name": "Ninja Coders",
+        "pollsCount": 23,
+        "category": "ion-social-tux"
+      },
+      {
+        "name": "Mobility Inovation",
+        "pollsCount": 49,
+        "category": "ion-speakerphone"
+      }
+    ];
 
 
     var oPolls = [
@@ -122,6 +140,20 @@ angular.module('voteit.services', [])
         //http://localhost:3000/api/groups/30.2342342343,79.2343243434
         //$http.get(BASE_HTTP_API_URL + 'groups/30.2342342343,79.2343243434')
         $http.get(BASE_HTTP_API_URL + 'groups/' + center.lat + ',' + center.lng)
+        .success(function(response){
+            deffered.resolve(response);
+        })
+        .error(function(err){
+            deffered.reject(err);
+        });
+
+        return deffered.promise;
+      },       
+      getGroupsByGeoLocation: function(center){
+        var deffered = $q.defer();
+        //http://localhost:3000/api/groups/30.2342342343,79.2343243434
+        //$http.get(BASE_HTTP_API_URL + 'groups/30.2342342343,79.2343243434')
+        $http.get(BASE_HTTP_API_URL + 'polls/' + center.lat + ',' + center.lng)
         .success(function(response){
             deffered.resolve(response);
         })

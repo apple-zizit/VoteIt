@@ -1,6 +1,8 @@
+var MOCK_MODE = true;
+
 angular.module('voteit.controllers', [])
 
-.controller('PollGropsCtrl', function($scope, $stateParams, pollService) {
+.controller('PollGropsCtrl', function($scope, $stateParams, pollService, MockService) {
     $scope.header = "pollit"
 
     var  center =  {
@@ -8,26 +10,42 @@ angular.module('voteit.controllers', [])
         lng: '79.2343243434'
     };
 
-    pollService.getGroupsByGeoLocation(center)
-    .then(function(result){
-        console.info(result);
-        $scope.groups = result;
-    }, function(err){
-        console.error(err);
-    });     
-
+    if (MOCK_MODE) {
+        $scope.groups = MockService.getGroups();
+    }
+    else {
+        pollService.getGroupsByGeoLocation(center)
+        .then(function(result){
+            console.info(result);
+            $scope.groups = result;
+        }, function(err){
+            console.error(err);
+            $scope.groups = MockService.getGroups();
+        });     
+    }
 })
 
 //shows the polls related to a group
-.controller('PollsInGroupCtrl', function($scope, $stateParams, PollsService) {
+.controller('PollsInGroupCtrl', function($scope, $stateParams, MockService) {
     // "Pets" is a service returning mock data (services.js)
     $scope.groupId = $stateParams.groupId;
 
     $scope.groupName = "Group name"
 
-    var oPolls = PollsService.getPolls(5);
+   if (MOCK_MODE) {
+        $scope.polls = MockService.getPolls(5);
+    }
+    else {
+        pollService.getPolls(center)
+        .then(function(result){
+            console.info(result);
+            $scope.groups = result;
+        }, function(err){
+            console.error(err);
+            $scope.polls = MockService.getPolls(5);
+        });     
+    }
 
-    $scope.polls = oPolls;
 })
 
 .controller('PollVotesCtrl', function($scope, $stateParams) {
@@ -109,13 +127,14 @@ angular.module('voteit.controllers', [])
 //----------------------------------------------------------------------------
 //  new poll
 //----------------------------------------------------------------------------
-.controller('CreateNewPollCtrl', function($scope, $stateParams, pollService) {
+.controller('CreateNewPollCtrl', function($scope, $rootScope, pollService) {
 
   var model = {
     group: null,
     category: 'ion-beer',
-    question: 'stam',
-    choices: [ { text: '' }, { text: '' }],
+    question: 'Question here ',
+    // choices: [ { text: '' }, { text: '' }],
+    choices: [ '', '' ],
     votes: [
         {
             userId: null,
@@ -132,6 +151,9 @@ angular.module('voteit.controllers', [])
 
   $scope.model = model;
 
+    model.center.lat = $rootScope.currentLocation.latitude;
+    model.center.lng = $rootScope.currentLocation.longitude;
+
    //$scope.header = "voteit" 
   $scope.allowToAddChoices = true;
 
@@ -141,16 +163,6 @@ angular.module('voteit.controllers', [])
           $scope.allowToAddChoices = false;   
       };
   };
-
-  if (navigator.geolocation)  {
-      navigator.geolocation.getCurrentPosition(function(position){
-        model.center.lat = position.coords.latitude;
-        model.center.lng = position.coords.longitude;
-      });
-  }
-  else {
-    console.log("Geolocation is not supported by this browser.");
-  }
 
     $scope.createPoll = function () {
         console.info(model);

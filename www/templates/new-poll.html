@@ -16,24 +16,26 @@ The 'pets' data comes from its $scope within PetIndexCtrl (controller.js)
 </div>
 
 <div class="list list-inset">
- <div class="item item-divider">
-  Group:
-</div>
-<input list="browsers" name="browser">
-<datalist id="browsers">
-  <option value="WebRTC group">
+  <div class="item item-divider">
+    Group:
+  </div>
+ <!--  <input list="browsers" name="browser">
+  <datalist id="browsers" ng-model="model.group">
+    <option value="WebRTC group">
     <option value="Mobility group">
-      <option value="Att group">
-      </datalist>
-
-    </div>
+    <option value="Att group">
+  </datalist> -->
+    <label class="item item-input">
+      <input type="text" placeholder="Enter group name" ng-model="model.group">
+    </label>
+      </div>
 
     <div class="list list-inset">
      <div class="item item-divider">
       Choices
     </div>
-    <label class="item item-input" ng-repeat="choice in model.choices">
-      <input type="text" placeholder="Enter choice {{$index+1}} text">
+    <label class="item item-input" ng-repeat="choice in model.choices track by $index">
+      <input type="text" ng-model="choice" placeholder="Enter choice {{$index+1}} text">
     </label>
     <br>
     <button class="button icon ion-plus" ng-click="addChoice()" ng-show="allowToAddChoices"></button>
