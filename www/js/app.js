@@ -28,7 +28,7 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', '
         url: '/pollit',
         views: {
             'pollit-tab': {
-                templateUrl: 'templates/pollit.html',
+                templateUrl: 'templates/polls-groups.html',
                 controller: 'PollGropsCtrl'
             }
         }
