@@ -149,8 +149,17 @@ angular.module('voteit.controllers', [])
 
   $scope.model = model;
 
+  if ($rootScope.currentLocation) {
     model.center.lat = $rootScope.currentLocation.latitude;
     model.center.lng = $rootScope.currentLocation.longitude;
+  }
+  else {
+    //temp - defaults
+    model.center.lat = '30.2342342343';
+    model.center.lng = '79.2343243434';  
+  }
+
+
 
    //$scope.header = "voteit" 
   $scope.allowToAddChoices = true;
@@ -208,40 +217,52 @@ angular.module('voteit.controllers', [])
 
 })
 
-.controller('DebugCtrl', function($scope, $stateParams, $ionicModal, $state, locationService) {
+//----------------------------------------------------------------------------
+//  debug
+//----------------------------------------------------------------------------
+.controller('DebugCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $state, locationService) {
+
+    var debugModel = {
+        geoPosition: {
+            Latitude: '0.0',
+            Longitude: '0.0'
+        }
+    }
+
+    $scope.model = debugModel;
+
     // Load the modal from the given template URL
-      $ionicModal.fromTemplateUrl('templates/newPollModal.html', function(modal) {
+    $ionicModal.fromTemplateUrl('templates/newPollModal.html', function (modal) {
         $scope.modal = modal;
-      }, {
+    }, {
         // Use our scope for the scope of the modal to keep it simple
         scope: $scope,
         // The animation we want to use for the modal entrance
         animation: 'slide-in-up'
-      });
+    });
 
-      // Test data
-      $scope.contacts = [
-        { name: 'Gordon Freeman' },
-        { name: 'Barney Calhoun' },
-        { name: 'Lamarr the Headcrab' }
-      ];
-
-      $scope.openModal = function() {
+    $scope.openModal = function () {
         $scope.modal.show();
-      };
-      $scope.closeModal = function() {
+    };
+    $scope.closeModal = function () {
         $scope.modal.hide();
-      };
+    };
 
-      $scope.vote = function() {
+    $scope.vote = function () {
         $scope.modal.hide();
         $state.go('tab.poll-votes');
-      };
+    };
 
-      //Be sure to cleanup the modal
-      $scope.$on('$destroy', function() {
+    //Be sure to cleanup the modal
+    $scope.$on('$destroy', function () {
         $scope.modal.remove();
-      });
- 
+    });
+
+    $scope.getLocation = function () {  
+      debugModel.geoPosition.Latitude = $rootScope.currentLocation.latitude;
+      debugModel.geoPosition.Longitude = $rootScope.currentLocation.longitude;
+    };
+    
+
 });
 

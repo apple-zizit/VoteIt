@@ -46,3 +46,11 @@ input, button, select, textarea, body, h1 {
   color: green;
 }
 
+#debugView .button {
+  width: 45px;
+  text-align: center;
+}
+
+#debugView .button i {
+  margin: 0 auto;
+}
