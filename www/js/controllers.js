@@ -1,4 +1,4 @@
-
+"use strict";
 
 angular.module('voteit.controllers', [])
 
@@ -65,52 +65,77 @@ angular.module('voteit.controllers', [])
 //----------------------------------------------------------------------------
 .controller('PollVotesCtrl', function($scope, $stateParams, MockService) {
 
+    var pollVotesModel = {
+      poll: null,
+      choices: [],
+      distinctChoices: [],
+      votesGraphData: [],
+      chartwidth: "100%",
+      chartHeight: 80,
+      chartOptions: oGraphOptions,
+      chartData: []
+    }
 
+    $scope.pollVotesModel = pollVotesModel;
 
     if (MOCK_MODE) {
-        $scope.votes = MockService.getPoll($stateParams.pollId);
+        pollVotesModel.poll = MockService.getPoll($stateParams.pollId);
     }
     else {
         pollService.getPoll(center)
         .then(function(result){
             console.info(result);
-            $scope.votes = result;
+            pollVotesModel.poll = result;
         }, function(err){
             console.error(err);
-            $scope.votes = MockService.getPoll($stateParams.pollId);
+            pollVotesModel.poll = MockService.getPoll($stateParams.pollId);
         });     
     }
 
-    var voteData = [
-        {
-          value : 100,
-          color : "#FDB45C",
-          label : '<%=value%>'
-        },
-        {
-          value : 40,
-          color : "#949FB1",
-          label : '<%=value%>'
-        },
-        {
-          value : 120,
-          color : "#4D5360",
-          label : '<%=value%>'
-        }
-
-      ];
-    
-    var color = ["#FF3B30","#FF9500","#4CD964","#FFCC00","#34AADC","#5856D6","#007AFF","#FF2D55","#D1EEFC","#8E8E93"];
-
-    for (var i = 0; i < voteData.length; i++) {
-        voteData[i].color = color[i];
+    //prepare text and color of each choice
+    for (var i = 0; i < pollVotesModel.poll.choices.length; i++) {
+      pollVotesModel.choices.push({
+          text: pollVotesModel.poll.choices[i],
+          color: oColors[i]
+      })
     };
 
-    $scope.MyChart = {
-        width: "100%",
-        height: 80,
-        options: oGraphOptions,
-        data: voteData
+    var getVotesDistinct = function(oVotes) {
+      var lookup = {};
+      var oVotesDistinct = [];
+
+      for (var i = 0; i < oVotes.length; i++) {
+        var vote = oVotes[i];
+
+        if (!(vote.choice in lookup)) {
+          lookup[vote.choice] = 1;
+          oVotesDistinct.push({
+            choice: vote.choice,
+            choiceCount: 1
+          });
+        } else {
+          lookup[vote.choice]++;
+        }
+      }
+
+      for (var i = 0; i < oVotesDistinct.length; i++) {
+        oVotesDistinct[i].choiceCount = lookup[oVotesDistinct[i].choice];
+      }
+
+      return oVotesDistinct;
+    }
+
+    // get distinct choices
+    pollVotesModel.distinctChoices = getVotesDistinct(pollVotesModel.poll.votes);
+    
+    // prepare the data for the graph
+    for (var i = 0; i < pollVotesModel.distinctChoices.length; i++) {
+      pollVotesModel.chartData.push(
+      {
+          value : pollVotesModel.distinctChoices[i].choiceCount,
+          color : oColors[i],
+          label : '<%=value%>'
+      });
     }
 
 })

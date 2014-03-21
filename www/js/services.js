@@ -1,3 +1,5 @@
+//"use strict";
+
 var BASE_HTTP_API_URL = 'http://10.114.20.244:3000/api/'
 
 angular.module('voteit.services', [])
@@ -71,7 +73,7 @@ angular.module('voteit.services', [])
       var oGropus = [];
 
      for (var i = 0; i < oPolls.length; i++) {
-        poll = oPolls[i];
+        var poll = oPolls[i];
 
         if (!(poll.group in lookup)) {
           lookup[poll.group] = 1;

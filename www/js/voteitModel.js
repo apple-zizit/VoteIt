@@ -2,18 +2,22 @@
 
     var oVotesRadious = [{
             userId: null,
-            choice: null
+            choice: 'Yes'
         }, {
             userId: null,
-            choice: null
+            choice: 'No'
         }, 
         {
             userId: null,
-            choice: null
+            choice: 'Yes'
         }, 
         {
             userId: null,
-            choice: null
+            choice: 'Yes'
+        }, 
+        {
+            userId: null,
+            choice: 'Just for the demo'
         }];
 
     var oVotesTheme = [{
@@ -46,7 +50,7 @@
         group: "VoteIt team",
         category: 'ion-beer',
         question: 'Should we limit the radius ?',
-        choices: ['Yes', 'No'],
+        choices: ['Yes', 'No', 'Just for the demo'],
         votes: oVotesRadious,
         center: {
             lat: null,

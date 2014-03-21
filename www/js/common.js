@@ -39,3 +39,5 @@
         scaleFontColor : "#FFF",
         scaleLabel : "<%=value%>"
     }
+
+       var oColors = ["#FF3B30","#FF9500","#4CD964","#FFCC00","#34AADC","#5856D6","#007AFF","#FF2D55","#D1EEFC","#8E8E93"];

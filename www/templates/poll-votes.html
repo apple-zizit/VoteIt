@@ -4,14 +4,14 @@
     
     <div class="card">
       <div class="item item-divider">
-        {{votes.question}}
+        {{pollVotesModel.poll.question}}
       </div>
       
       <div class="list">
-        <label class="item item-radio" ng-repeat="choice in votes.choices">
+        <label class="item item-radio" ng-repeat="choice in pollVotesModel.choices">
           <input type="radio" name="group">
           <div class="item-content">
-            {{choice}}
+            {{choice.text}}
           </div>
           <i class="radio-icon ion-checkmark">
           </i>
@@ -46,10 +46,10 @@
     
     <div class="card">
       <div class="item item-divider">
-        Total votes: 54
+        Total votes: {{pollVotesModel.poll.votes.length}}
       </div>
       <label class="item item-input" >
-        <chartjs width="MyChart.width" height="MyChart.height" data="MyChart.data"  options="MyChart.options"   is-type="Doughnut">
+        <chartjs width="pollVotesModel.chartwidth" height="pollVotesModel.chartHeight" data="pollVotesModel.chartData"  options="pollVotesModel.chartOptions"   is-type="Doughnut">
         </chartjs>
       </label>
       
