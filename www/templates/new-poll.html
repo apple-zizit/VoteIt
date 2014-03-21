@@ -3,7 +3,7 @@
   <ion-content has-header="true" has-tabs="true">
     
     <div class="list list-inset">
-      <div class="item item-divider">
+      <div class="item item-divider bar-balanced">
         Question
       </div>
       <label class="item item-input">
@@ -26,10 +26,10 @@
         Choices
       </div>
       <label class="item item-input" ng-repeat="choice in uiModel.choices">
-        <input type="text" placeholder="Enter choice {{$index+1}} text">
+        <input type="text" placeholder="Enter choice {{$index+1}} text" ng-model="choice.text">
       </label>
       <label class="item item-input" >
-        <button class="button button-block button-royal" ng-click="addChoice()" ng-show="uiModel.allowToAddChoices">
+        <button class="button button-block button-energized" ng-click="addChoice()" ng-show="uiModel.allowToAddChoices">
           Add Choice
         </button>
       </label>

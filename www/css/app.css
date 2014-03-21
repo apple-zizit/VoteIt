@@ -67,3 +67,7 @@ input, button, select, textarea, body, h1 {
 #pollVotes .item-content{
   float: left;
 }
+
+#pollVotes .ion-plus{
+  width: 50px;
+}

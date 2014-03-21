@@ -1,5 +1,6 @@
 <ion-view title="{{votes.group}}" id="pollVotes">
   <ion-content has-header="true" has-tabs="true" padding="true">
+
     <div class="card">
       <div class="item item-divider">
         {{pollVotesModel.poll.question}}
@@ -17,8 +18,10 @@
           </i>
         </label>
         <label class="item item-input">
-          <button class="button button-block button-assertive">
-            Add Choice 
+          <button class="button icon ion-plus button-energized"></button>
+          &nbsp;
+           <button class="button button-block button-assertive">
+            Vote It !
           </button>
         </label>
         <div class="item item-divider">
@@ -35,6 +38,7 @@
             </div>
           </div>
         </div>
+ 
       </div>
     </div>
     <div class="card">

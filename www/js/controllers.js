@@ -93,13 +93,19 @@ angular.module('voteit.controllers', [])
 
    
     var oChoicesLockup = {};
+    var choicesColors = oColors.slice(0); //shadow copy
     for (var i = 0; i < pollVotesModel.poll.choices.length; i++) {
+
+
+      var colorId = Math.floor((Math.random()*choicesColors.length));     
+
       pollVotesModel.choices.push({
           text: pollVotesModel.poll.choices[i],
-          color: oColors[i]
+          color: choicesColors[colorId]
       });
        //choices colors lockup table
-      oChoicesLockup[pollVotesModel.poll.choices[i]] = oColors[i];
+      oChoicesLockup[pollVotesModel.poll.choices[i]] = choicesColors[colorId];
+      choicesColors.splice(colorId, 1);
     };
 
     var getVotesDistinct = function(oVotes) {
@@ -145,13 +151,12 @@ angular.module('voteit.controllers', [])
 //----------------------------------------------------------------------------
 //  new poll
 //----------------------------------------------------------------------------
-.controller('CreateNewPollCtrl', function ($scope, $rootScope, pollService) {
+.controller('CreateNewPollCtrl', function ($scope, $rootScope, $ionicPopup, $state, pollService) {
 
     var model = {
         group: null,
         category: 'ion-beer',
-        question: 'Question here ',
-        // choices: [ { text: '' }, { text: '' }],
+        question: '',
         choices: [],
         votes: [{
             userId: null,
@@ -198,23 +203,39 @@ angular.module('voteit.controllers', [])
 
     $scope.createPoll = function () {
 
-        for (var i = 0; i < uiModel.choices.length; i++) {
-          model.choice.push(uiModel.choices[i].text);
+      for (var i = 0; i < uiModel.choices.length; i++) {
+        if (uiModel.choices[i].text.length === 0) {
+          alert('No choice for blank choices  !!!');
+          return;
         }
+        model.choices.push(uiModel.choices[i].text);
+      }
 
-        console.info(model);
-        if (MOCK_MODE) {
+      console.info(model);
+      if (MOCK_MODE) {
 
-        } else {
+      } else {
 
-            pollService.newPoll(model)
-                .then(function (result) {
-                    console.info(result);
-                }, function (err) {
-                    console.error(err);
-                });
-        }
+        pollService.newPoll(model)
+          .then(function(result) {
+            console.info(result);
+          }, function(err) {
+            console.error(err);
+          });
+      }
+      $scope.showAlert();
+      
     }
+
+    $scope.showAlert = function() {
+        $ionicPopup.alert({
+          title: 'Poll it ! Mannn',
+          content: 'Congratulations, your poll is created and is on his way to the voters.'
+        }).then(function(res) {
+          console.log('Thank you for polling :)');
+          $state.go('tab.groups');
+        });
+      };
 
 })
 
@@ -256,7 +277,7 @@ angular.module('voteit.controllers', [])
 //----------------------------------------------------------------------------
 //  debug
 //----------------------------------------------------------------------------
-.controller('DebugCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $state, locationService) {
+.controller('DebugCtrl', function ($scope, $rootScope, $stateParams,$ionicPopup, $state, locationService) {
 
     var debugModel = {
         geoPosition: {
@@ -267,37 +288,20 @@ angular.module('voteit.controllers', [])
 
     $scope.model = debugModel;
 
-    // Load the modal from the given template URL
-    $ionicModal.fromTemplateUrl('templates/newPollModal.html', function (modal) {
-        $scope.modal = modal;
-    }, {
-        // Use our scope for the scope of the modal to keep it simple
-        scope: $scope,
-        // The animation we want to use for the modal entrance
-        animation: 'slide-in-up'
-    });
-
-    $scope.openModal = function () {
-        $scope.modal.show();
-    };
-    $scope.closeModal = function () {
-        $scope.modal.hide();
-    };
-
-    $scope.vote = function () {
-        $scope.modal.hide();
-        $state.go('tab.poll-votes');
-    };
-
-    //Be sure to cleanup the modal
-    $scope.$on('$destroy', function () {
-        $scope.modal.remove();
-    });
-
     $scope.getLocation = function () {  
       debugModel.geoPosition.Latitude = $rootScope.currentLocation.latitude;
       debugModel.geoPosition.Longitude = $rootScope.currentLocation.longitude;
     };
+
+     $scope.showAlert = function() {
+        $ionicPopup.alert({
+          title: 'New Poll !',
+          content: 'A new poll was submitted, whould like to join the vote ?'
+        }).then(function(res) {
+          console.log('Thank you for voting');
+          $state.go('tab.poll-votes',{ "pollId": 1});
+        });
+      };
     
 
 });
