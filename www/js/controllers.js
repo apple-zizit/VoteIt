@@ -227,15 +227,23 @@ angular.module('voteit.controllers', [])
       
     }
 
+
     $scope.showAlert = function() {
-        $ionicPopup.alert({
-          title: 'Poll it ! Mannn',
-          content: 'Congratulations, your poll is created and is on his way to the voters.'
-        }).then(function(res) {
-          console.log('Thank you for polling :)');
-          $state.go('tab.groups');
-        });
-      };
+      $ionicPopup.show({
+        title: 'Poll it ! Mannn',
+        content: 'Congratulations, your poll is created and is on his way to the voters.',
+        scope: $scope,
+        buttons: [{
+          text: 'Ok',
+          type: 'button-assertive',
+          onTap: function() {
+            console.log('Thank you for Polling');
+            $state.go('tab.groups');
+            return true;
+          }
+        }]
+      });
+    };
 
 })
 
@@ -293,16 +301,29 @@ angular.module('voteit.controllers', [])
       debugModel.geoPosition.Longitude = $rootScope.currentLocation.longitude;
     };
 
-     $scope.showAlert = function() {
-        $ionicPopup.alert({
-          title: 'New Poll !',
-          content: 'A new poll was submitted, whould like to join the vote ?'
-        }).then(function(res) {
-          console.log('Thank you for voting');
-          $state.go('tab.poll-votes',{ "pollId": 1});
-        });
-      };
-    
+    $scope.showAlert = function() {
+      $ionicPopup.show({
+        title: 'New Poll !',
+        content: 'A new poll was submitted, whould like to join the vote ?',
+        scope: $scope,
+        buttons: [{
+          text: 'Vote it !',
+          type: 'button-assertive',
+          onTap: function() {
+            console.log('Thank you for voting');
+            $state.go('tab.poll-votes',{ "pollId": 1});
+            return true;
+          }
+        },
+        {
+          text: 'Not now',
+          type: 'button-light',
+          onTap: function() {
+            return true;
+          }
+        }]
+      });
+    };
 
 });
 
