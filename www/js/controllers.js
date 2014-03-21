@@ -81,7 +81,7 @@ angular.module('voteit.controllers', [])
         });     
     }
 
-    var doughnutData = [
+    var voteData = [
         {
           value : 100,
           color : "#FDB45C",
@@ -102,16 +102,15 @@ angular.module('voteit.controllers', [])
     
     var color = ["#FF3B30","#FF9500","#4CD964","#FFCC00","#34AADC","#5856D6","#007AFF","#FF2D55","#D1EEFC","#8E8E93"];
 
-    // for (var i = 0; i < data.length; i++) {
-    //     data[i].color = color[i];
-    //     data[i].legend = "Option " + i+1;
-    // };
+    for (var i = 0; i < voteData.length; i++) {
+        voteData[i].color = color[i];
+    };
 
     $scope.MyChart = {
-        width: 40,
+        width: "100%",
         height: 80,
         options: oGraphOptions,
-        data: doughnutData
+        data: voteData
     }
 
 })

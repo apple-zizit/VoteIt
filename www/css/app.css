@@ -54,3 +54,7 @@ input, button, select, textarea, body, h1 {
 #debugView .button i {
   margin: 0 auto;
 }
+
+#pollVotes canvas {
+  margin: auto;
+}

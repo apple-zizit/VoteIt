@@ -53,16 +53,20 @@ angular.module("chartjs-directive", []).directive('chartjs',['$filter', function
 				}
 			};
 
-			//black magic :)
-			if($scope.width === "100%") {
-				$scope.width = $scope.references.parent.width;
-				$scope.references.self.width = $scope.width;
-				$scope.$watch("references.parent.obj.clientWidth",function(newValue,old) {
-					if(newValue != old)
-						$scope.width = (newValue * $scope.references.self.width)/$scope.references.parent.width;
-				})
+			// //black magic :)
+			// if($scope.width === "100%") {
+			// 	$scope.width = $scope.references.parent.width;
+			// 	$scope.references.self.width = $scope.width;
+			// 	$scope.$watch("references.parent.obj.clientWidth",function(newValue,old) {
+			// 		if(newValue != old)
+			// 			$scope.width = (newValue * $scope.references.self.width)/$scope.references.parent.width;
+			// 	})
+			// }
+				if($scope.width === "100%") {
+				element[0].width = $scope.references.parent.width * 0.7;
+				element[0].height = $scope.references.parent.width * 0.7 ;
+				
 			}
-			
 
 			$scope.generate = function() {
 				$scope.instance = eval('new Chart(ctx).' +attr.isType+  '($scope.data,$scope.options)');
@@ -70,15 +74,15 @@ angular.module("chartjs-directive", []).directive('chartjs',['$filter', function
 
 			}
 
-			$scope.$watch('width',function(newValue, oldValue) {
-				element[0].width = newValue;
-				$scope.generate()
-			});
+			// $scope.$watch('width',function(newValue, oldValue) {
+			// 	element[0].width = newValue;
+			// 	$scope.generate()
+			// });
 
-			$scope.$watch('height',function(newValue, oldValue) {
-				element[0].height = newValue;
-				$scope.generate();
-			});
+			// $scope.$watch('height',function(newValue, oldValue) {
+			// 	element[0].height = newValue;
+			// 	$scope.generate();
+			// });
 
 			$scope.$watch('data',function(newValue,oldValue) {
 				$scope.generate();
