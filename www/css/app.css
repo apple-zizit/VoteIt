@@ -33,3 +33,16 @@ input, button, select, textarea, body, h1 {
 	border: 1px solid #000;
 	width: 80px;
 }
+
+#newPoll .ion-location {
+  font-size: 30px;
+  padding: 0 0 0 46px;
+  color: orange;
+}
+
+#newPoll .ion-clock {
+  font-size: 30px;
+  padding: 0 0 0 20px;
+  color: green;
+}
+

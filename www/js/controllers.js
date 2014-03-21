@@ -156,7 +156,7 @@ angular.module('voteit.controllers', [])
   $scope.allowToAddChoices = true;
 
   $scope.addChoice = function() {
-      model.choices.push({ text: '' });
+      model.choices.push('');
       if (model.choices.length >4) {
           $scope.allowToAddChoices = false;   
       };
