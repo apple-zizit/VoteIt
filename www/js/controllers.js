@@ -125,60 +125,75 @@ angular.module('voteit.controllers', [])
 //----------------------------------------------------------------------------
 //  new poll
 //----------------------------------------------------------------------------
-.controller('CreateNewPollCtrl', function($scope, $rootScope, pollService) {
+.controller('CreateNewPollCtrl', function ($scope, $rootScope, pollService) {
 
-  var model = {
-    group: null,
-    category: 'ion-beer',
-    question: 'Question here ',
-    // choices: [ { text: '' }, { text: '' }],
-    choices: [ '', '' ],
-    votes: [
-        {
+    var model = {
+        group: null,
+        category: 'ion-beer',
+        question: 'Question here ',
+        // choices: [ { text: '' }, { text: '' }],
+        choices: [],
+        votes: [{
             userId: null,
             choice: null
-        }
-    ],
-    center: {
-        lat: null,
-        lng: null
-    },
-    radius: 500,
-    timeout: null
-}
+        }],
+        center: {
+            lat: null,
+            lng: null
+        },
+        radius: 500,
+        timeout: null
+    }
 
-  $scope.model = model;
+    var uiModel = {
+        allowToAddChoices: true,
+        choices: [{
+            text: ''
+        }, {
+            text: ''
+        }]
+    }
 
-  if ($rootScope.currentLocation) {
-    model.center.lat = $rootScope.currentLocation.latitude;
-    model.center.lng = $rootScope.currentLocation.longitude;
-  }
-  else {
-    //temp - defaults
-    model.center.lat = '30.2342342343';
-    model.center.lng = '79.2343243434';  
-  }
+    $scope.model = model;
+    $scope.uiModel = uiModel;
+
+    if ($rootScope.currentLocation) {
+        model.center.lat = $rootScope.currentLocation.latitude;
+        model.center.lng = $rootScope.currentLocation.longitude;
+    } else {
+        //temp - defaults
+        model.center.lat = '30.2342342343';
+        model.center.lng = '79.2343243434';
+    }
 
 
-
-   //$scope.header = "voteit" 
-  $scope.allowToAddChoices = true;
-
-  $scope.addChoice = function() {
-      model.choices.push('');
-      if (model.choices.length >4) {
-          $scope.allowToAddChoices = false;   
-      };
-  };
+    $scope.addChoice = function () {
+        uiModel.choices.push({
+            text: ''
+        });
+        if (uiModel.choices.length > 4) {
+            uiModel.allowToAddChoices = false;
+        };
+    };
 
     $scope.createPoll = function () {
+
+        for (var i = 0; i < uiModel.choices.length; i++) {
+          model.choice.push(uiModel.choices[i].text);
+        };
+
         console.info(model);
-      pollService.newPoll(model)
-        .then(function(result){
-            console.info(result);
-        }, function(err){
-            console.error(err);
-        });     
+        if (MOCK_MODE) {
+
+        } else {
+
+            pollService.newPoll(model)
+                .then(function (result) {
+                    console.info(result);
+                }, function (err) {
+                    console.error(err);
+                });
+        }
     }
 
 })
@@ -187,6 +202,7 @@ angular.module('voteit.controllers', [])
 //  Settings
 //----------------------------------------------------------------------------
 .controller('SettingsCtrl', function($scope, $stateParams, usersService) {
+
     var model = {
       user: {
         username: null,

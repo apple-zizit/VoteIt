@@ -25,11 +25,11 @@
       <div class="item item-divider">
         Choices
       </div>
-      <label class="item item-input" ng-repeat="choice in model.choices track by $index">
-        <input type="text" ng-model="choice" placeholder="Enter choice {{$index+1}} text">
+      <label class="item item-input" ng-repeat="choice in uiModel.choices">
+        <input type="text" placeholder="Enter choice {{$index+1}} text">
       </label>
       <label class="item item-input" >
-        <button class="button button-block button-royal" ng-click="addChoice()" ng-show="allowToAddChoices">
+        <button class="button button-block button-royal" ng-click="addChoice()" ng-show="uiModel.allowToAddChoices">
           Add Choice
         </button>
       </label>
