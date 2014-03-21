@@ -29,5 +29,13 @@
         animateScale: false,
 
         //Function - Will fire on animation completion.
-        onAnimationComplete: null
+        onAnimationComplete: null,
+
+        scaleShowLabels: true,
+
+        scaleLabelPaddingX: 10,
+
+        scaleFontStyle : "bold",
+        scaleFontColor : "#FFF",
+        scaleLabel : "<%=value%>"
     }

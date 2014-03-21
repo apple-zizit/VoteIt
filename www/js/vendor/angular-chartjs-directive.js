@@ -66,6 +66,8 @@ angular.module("chartjs-directive", []).directive('chartjs',['$filter', function
 
 			$scope.generate = function() {
 				$scope.instance = eval('new Chart(ctx).' +attr.isType+  '($scope.data,$scope.options)');
+			   // var myDoughnut =        new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData, { scaleShowLabels: true });
+
 			}
 
 			$scope.$watch('width',function(newValue, oldValue) {
