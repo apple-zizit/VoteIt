@@ -62,12 +62,40 @@ angular.module('voteit.services', [])
 .service('MockService', function() {
   // Might use a resource here that returns a JSON array  
 
+  var getGroupsDistinct = function () {
+        var lookup = {};
+      // var items = oPolls;
+      var oGropus = [];
+
+     for (var i = 0; i < oPolls.length; i++) {
+        poll = oPolls[i];
+
+        if (!(poll.group in lookup)) {
+          lookup[poll.group] = 1;
+          oGropus.push({
+            name: poll.group,
+            pollsCount: 1,
+            category: poll.category,
+          });
+        } 
+        else {
+          lookup[poll.group]++; 
+        }
+      }   
+
+      for (var i = 0; i < oGropus.length; i++) {
+        oGropus[i].pollsCount = lookup[oGropus[i].name];
+      }
+      return oGropus;
+  }
+
   return {
     newPoll: function(oPollData) {
       return oGrougps;
     },
     getGroups: function() {
-      return oGrougps;
+      //return oGrougps;
+      return getGroupsDistinct();
     },
     getPolls: function(groupName) {
    
