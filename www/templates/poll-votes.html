@@ -1,85 +1,83 @@
 <!--
-  This template loads for the 'tab.about' state (app.js)
+This template loads for the 'tab.about' state (app.js)
 -->
-<ion-view title="{{pollName}}"  >
-<ion-content has-header="true" has-tabs="true" padding="true">
-
-<div class="card">
-	<div class="item item-divider">
-		Cat or Dog?
-	</div>
-	<div class="item item-text-wrap">
-		<div class="list">
-
-			<label class="item item-radio">
-				<input type="radio" name="group">
-				<div class="item-content">
-					#1fsjdgkfhslgjkhfkgjdhgjshdflgk
-				</div>
-				<i class="radio-icon ion-checkmark"></i>
-			</label>
-			<label class="item item-radio">
-				<input type="radio" name="group">
-				<div class="item-content">
-					Go
-				</div>
-				<i class="radio-icon ion-checkmark"></i>
-			</label>
-			<label class="item item-radio">
-				<input type="radio" name="group">
-				<div class="item-content">
-					No!
-				</div>
-				<i class="radio-icon ion-checkmark"></i>
-			</label>
-
-
-			<br>
-			<div>
-				<button class="button button-outline button-dark ion-ios7-plus-empty"></button>
-			</div>
-
-		</div>
-
-
-
-
-	</div>
-	<div class="item item-divider">
-		<i class="ion-ios7-timer"></i>00:05
-	</div>
-</div>
-
+<ion-view title="{{votes.group}}"  >
+  <ion-content has-header="true" has-tabs="true" padding="true">
+    
+    <div class="card">
+      <div class="item item-divider">
+		{{votes.question}}
+  </div>
+  <div class="item item-text-wrap">
+    <div class="list">
+      
+      <label class="item item-radio" ng-repeat="choice in votes.choices">
+        <input type="radio" name="group">
+        <div class="item-content">
+          {{choice}}
+        </div>
+        <i class="radio-icon ion-checkmark">
+        </i>
+      </label>
+      <label class="item item-input" >
+        <button class="button button-block button-royal">
+          Add Choice
+        </button>
+      </label>
+      
+      
+    </div>
+    
+  </div>
+  <div class="item item-divider">
 
 <div class="row">
-	<div class="col">
-		<div class="row">
-			<div class="col">
-				<i class="icon ion-stop"></i>Op1
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<i class="icon ion-stop"></i>Op2
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<i class="icon ion-stop"></i>Op3
-			</div>
-		</div>
-
-	</div>
-	<div class="col col-75">
-		<chartjs width="MyChart.width" height="MyChart.height" data="MyChart.data"  options="MyChart.options"   is-type="Doughnut"></chartjs>
-	</div>
+  <div class="col col-10"> <i class="ion-ios7-timer">
+    </i></div>
+  <div class="col col-30">Time Left: </div>
+  <div class="col ">5 Minutes</div>
 </div>
-
-
-
-
-
-
-
-</ion-content>
+    
+  </div>
+  </div>
+  
+  
+  <div class="row">
+	<div class="col">
+      <div class="row">
+        <div class="col">
+          <i class="icon ion-stop">
+          </i>
+          Op1
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <i class="icon ion-stop">
+          </i>
+          Op2
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <i class="icon ion-stop">
+          </i>
+          Op3
+        </div>
+      </div>
+      
+  </div>
+  <div class="col col-75">
+    <chartjs width="MyChart.width" height="MyChart.height" data="MyChart.data"  options="MyChart.options"   is-type="Doughnut">
+    </chartjs>
+  </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  </ion-content>
 </ion-view>

@@ -46,7 +46,7 @@
         group: "VoteIt team",
         category: 'ion-beer',
         question: 'Should we limit the radius ?',
-        choices: [],
+        choices: ['Yes', 'No'],
         votes: oVotesRadious,
         center: {
             lat: null,
@@ -60,7 +60,7 @@
         group: "VoteIt team",
         category: 'ion-beer',
         question: 'UI Theme, Red or Green ?',
-        choices: [],
+        choices: ['Red', 'Green', 'Other Color'],
         votes: oVotesTheme,
         center: {
             lat: null,
@@ -70,11 +70,11 @@
         timeout: null
     },
     {
-        id: "2",
+        id: "3",
         group: "VoteIt team",
         category: 'ion-beer',
         question: 'Android or IOS ?',
-        choices: [],
+        choices: ['Android', 'IOS', 'Phonegap'],
         votes: [{
             userId: null,
             choice: null
@@ -104,7 +104,7 @@
         timeout: null
     },
     {
-        id: "4",
+        id: "5",
         group: "Mobility Inovation",
         category: 'ion-speakerphone',
         question: 'Who should win the proximiton ?',

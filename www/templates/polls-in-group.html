@@ -9,7 +9,7 @@
     
   <div class="list">
 
-    <a class="item" href="#/tab/poll-votes/{{polls.pollId}}" ng-repeat="poll in polls">
+    <a class="item" href="#/tab/poll-votes/{{poll.id}}" ng-repeat="poll in polls">
       {{poll.question}}
        <span class="badge badge-assertive">{{poll.votes.length}}</span>
     </a>

@@ -1,8 +1,11 @@
-var MOCK_MODE = true;
+
 
 angular.module('voteit.controllers', [])
 
-.controller('PollGropsCtrl', function($scope, $stateParams, pollService, MockService) {
+//----------------------------------------------------------------------------
+//  Groups
+//----------------------------------------------------------------------------
+.controller('PollGropsCtrl', function($scope, $rootScope, $stateParams, pollService, MockService) {
     $scope.header = "pollit"
 
     var  center =  {
@@ -10,8 +13,17 @@ angular.module('voteit.controllers', [])
         lng: '79.2343243434'
     };
 
+    if ($rootScope.currentLocation) {
+        center.lat = $rootScope.currentLocation.latitude;
+        center.lng = $rootScope.currentLocation.longitude;
+    } else {
+        //temp - defaults
+        center.lat = '30.2342342343';
+        center.lng = '79.2343243434';
+    }
+
     if (MOCK_MODE) {
-        $scope.groups = MockService.getGroups();
+        $scope.groups = MockService.getGroups(center);
     }
     else {
         pollService.getGroupsByGeoLocation(center)
@@ -48,43 +60,26 @@ angular.module('voteit.controllers', [])
 
 })
 
-.controller('PollVotesCtrl', function($scope, $stateParams) {
-    $scope.pollId = $stateParams.pollId;
+//----------------------------------------------------------------------------
+//  votes of a poll
+//----------------------------------------------------------------------------
+.controller('PollVotesCtrl', function($scope, $stateParams, MockService) {
 
-    $scope.pollName = "Poll name"
 
-  var options = {
-        //Boolean - Whether we should show a stroke on each segment
-        segmentShowStroke: true,
 
-        //String - The colour of each segment stroke
-        segmentStrokeColor: "#fff",
-
-        //Number - The width of each segment stroke
-        segmentStrokeWidth: 2,
-
-        //The percentage of the chart that we cut out of the middle.
-        percentageInnerCutout: 50,
-
-        //Boolean - Whether we should animate the chart 
-        animation: true,
-
-        //Number - Amount of animation steps
-        animationSteps: 100,
-
-        //String - Animation easing effect
-        animationEasing: "easeOutBounce",
-
-        //Boolean - Whether we animate the rotation of the Doughnut
-        animateRotate: true,
-
-        //Boolean - Whether we animate scaling the Doughnut from the centre
-        animateScale: false,
-
-        //Function - Will fire on animation completion.
-        onAnimationComplete: null
+    if (MOCK_MODE) {
+        $scope.votes = MockService.getPoll($stateParams.pollId);
     }
-
+    else {
+        pollService.getPoll(center)
+        .then(function(result){
+            console.info(result);
+            $scope.votes = result;
+        }, function(err){
+            console.error(err);
+            $scope.votes = MockService.getPoll($stateParams.pollId);
+        });     
+    }
 
     var data = [{
             value: 30,
@@ -118,7 +113,7 @@ angular.module('voteit.controllers', [])
     $scope.MyChart = {
         width: 40,
         height: 80,
-        options: options,
+        options: oGraphOptions,
         data: data
     }
 

@@ -96,9 +96,9 @@ angular.module('voteit.services', [])
     newPoll: function(oPollData) {
       return oGrougps;
     },
-    getGroups: function() {
+    getGroups: function(center) {
       //return oGrougps;
-      return getGroupsDistinct();
+      return getGroupsDistinct(center);
     },
     getPolls: function(groupName) {
    
@@ -111,6 +111,14 @@ angular.module('voteit.services', [])
   
       return polls;
     },
+    getPoll: function(iPollId) {
+   
+      for (var i = 0; i < oPolls.length; i++) {
+        if (oPolls[i].id===iPollId) {
+            return oPolls[i];
+        }
+      }
+    },    
     postUserName: function(userName) {
       // Simple index lookup
       
@@ -178,7 +186,7 @@ angular.module('voteit.services', [])
 
         return deffered.promise;
       }, 
-      vote: function(vote){
+      getPoll: function(vote){
         var deffered = $q.defer();
 
         $http.post(BASE_HTTP_API_URL + 'polls/vote', newVote)
