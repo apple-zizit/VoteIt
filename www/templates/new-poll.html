@@ -1,73 +1,80 @@
-<!-- 
-This template gets placed in the Pet tab's <ion-nav-view> directive.
-It was wired up in the app config (app.js) 
-The 'pets' data comes from its $scope within PetIndexCtrl (controller.js)
--->
+
 <ion-view title="VoteIt !" id="newPoll">
-<ion-content has-header="true" has-tabs="true">
-
-<div class="list list-inset">
-  <div class="item item-divider">
-    Question
-  </div>
-  <label class="item item-input">
-    <input type="text" placeholder="Enter poll question" ng-model="model.question">
-  </label>
-</div>
-
-<div class="list list-inset">
-  <div class="item item-divider">
-    Group:
-  </div>
-
-  <label class="item item-input">
-    <input type="text" placeholder="Enter group name" ng-model="model.group">
-  </label>
-</div>
-
-<div class="list list-inset">
-  <div class="item item-divider">
-    Choices
-  </div>
-  <label class="item item-input" ng-repeat="choice in model.choices track by $index">
-    <input type="text" ng-model="choice" placeholder="Enter choice {{$index+1}} text">
-  </label>
-  <label class="item item-input" >
-    <button class="button button-block button-royal" ng-click="addChoice()" ng-show="allowToAddChoices">
-      Add Choice
-    </button>
-  </label>
-  <br>
-
-  <div class="item item-divider">
-    Range
-  </div>
-  <label class="item item-input" >
-    <div class="range">
-      5m<input type="range" name="volume" min="5" max="1000" value="33" ng-model="model.radius">1km
-      <i class="ion-location"></i>&nbsp;
+  <ion-content has-header="true" has-tabs="true">
+    
+    <div class="list list-inset">
+      <div class="item item-divider">
+        Question
+      </div>
+      <label class="item item-input">
+        <input type="text" placeholder="Enter poll question" ng-model="model.question">
+      </label>
     </div>
-  </label>
- 
-  <br/>
-
-  <div class="item item-divider">
-    Expiration Time
-  </div>
-  <label class="item item-input" >
+    
+    <div class="list list-inset">
+      <div class="item item-divider">
+        Group:
+      </div>
       
       <label class="item item-input">
-        <span class="input-label">Date</span>
-        <input type="date">
+        <input type="text" placeholder="Enter group name" ng-model="model.group">
+      </label>
+    </div>
+    
+    <div class="list list-inset">
+      <div class="item item-divider">
+        Choices
+      </div>
+      <label class="item item-input" ng-repeat="choice in model.choices track by $index">
+        <input type="text" ng-model="choice" placeholder="Enter choice {{$index+1}} text">
+      </label>
+      <label class="item item-input" >
+        <button class="button button-block button-royal" ng-click="addChoice()" ng-show="allowToAddChoices">
+          Add Choice
+        </button>
+      </label>
+      <br>
+      
+      <div class="item item-divider">
+        Range
+      </div>
+      <label class="item item-input" >
+        <div class="row">
+          <div class="col col-80">
+            <div class="range">
+              5m
+              <input type="range" name="volume" min="5" max="1000" value="33" ng-model="model.radius">
+              1km
+            </div>
+          </div>
+          <div class="col">         
+            <i class="ion-location">
+            </i>
+          </div>
+        </div>
       </label>
       
-      <i class="ion-clock"></i>&nbsp;
-   </label>
-
-  <button class="button button-block button-assertive" ng-click="createPoll()">
-    Create Poll
-  </button>
- </div>
- <br/>
-</ion-content>
+      <br/>
+      
+      <div class="item item-divider">
+        Expiration Time
+      </div>
+      <label class="item item-input" >
+        <div class="row">
+  <div class="col col-80"> <input type="date"></div>
+  <div class="col"><i class="ion-clock">
+        </i></div>
+</div>
+      
+        
+        
+        &nbsp;
+      </label>
+      
+      <button class="button button-block button-assertive" ng-click="createPoll()">
+        Create Poll
+      </button>
+    </div>
+    <br/>
+  </ion-content>
 </ion-view>
