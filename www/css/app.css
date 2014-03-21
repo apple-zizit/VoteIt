@@ -58,3 +58,12 @@ input, button, select, textarea, body, h1 {
 #pollVotes canvas {
   margin: auto;
 }
+
+#pollVotes .button-icon{
+  float: left;
+  padding: 5px 0 0 10px;
+}
+
+#pollVotes .item-content{
+  float: left;
+}

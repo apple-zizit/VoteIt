@@ -41,7 +41,6 @@ angular.module('voteit.controllers', [])
 //  Polls of groups
 //----------------------------------------------------------------------------
 .controller('PollsInGroupCtrl', function($scope, $stateParams, MockService) {
-    // "Pets" is a service returning mock data (services.js)
     $scope.groupName = $stateParams.groupName;
 
    if (MOCK_MODE) {
@@ -92,12 +91,15 @@ angular.module('voteit.controllers', [])
         });     
     }
 
-    //prepare text and color of each choice
+   
+    var oChoicesLockup = {};
     for (var i = 0; i < pollVotesModel.poll.choices.length; i++) {
       pollVotesModel.choices.push({
           text: pollVotesModel.poll.choices[i],
           color: oColors[i]
-      })
+      });
+       //choices colors lockup table
+      oChoicesLockup[pollVotesModel.poll.choices[i]] = oColors[i];
     };
 
     var getVotesDistinct = function(oVotes) {
@@ -133,7 +135,7 @@ angular.module('voteit.controllers', [])
       pollVotesModel.chartData.push(
       {
           value : pollVotesModel.distinctChoices[i].choiceCount,
-          color : oColors[i],
+          color : oChoicesLockup[pollVotesModel.distinctChoices[i].choice],
           label : '<%=value%>'
       });
     }
