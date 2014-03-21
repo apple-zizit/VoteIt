@@ -11,7 +11,7 @@
 
     <a class="item" href="#/tab/poll-votes/{{polls.pollId}}" ng-repeat="poll in polls">
       {{poll.question}}
-       <span class="badge badge-assertive">{{poll.votes}}</span>
+       <span class="badge badge-assertive">{{poll.votes.length}}</span>
     </a>
 
   </div>

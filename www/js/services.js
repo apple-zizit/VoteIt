@@ -59,6 +59,9 @@ angular.module('voteit.services', [])
 
         
     })
+//----------------------------------------------------------------------------
+//  Mock Service
+//----------------------------------------------------------------------------
 .service('MockService', function() {
   // Might use a resource here that returns a JSON array  
 
@@ -99,11 +102,10 @@ angular.module('voteit.services', [])
     },
     getPolls: function(groupName) {
    
-      var polls = null;
-      for (var i = 0; i < oGrougps.length; i++) {
-        if (oGrougps[i].name===groupName) {
-            polls = oGrougps[i].polls;
-            break;
+      var polls = [];
+      for (var i = 0; i < oPolls.length; i++) {
+        if (oPolls[i].group===groupName) {
+            polls.push(oPolls[i]);
         };
       };
   
