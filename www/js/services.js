@@ -96,7 +96,7 @@ angular.module('voteit.services', [])
 
   return {
     newPoll: function(oPollData) {
-      return oGrougps;
+      return 'ok';
     },
     getGroups: function(center) {
       //return oGrougps;
@@ -163,8 +163,6 @@ angular.module('voteit.services', [])
       },       
       getGroupsByGeoLocation: function(center){
         var deffered = $q.defer();
-        //http://localhost:3000/api/groups/30.2342342343,79.2343243434
-        //$http.get(BASE_HTTP_API_URL + 'groups/30.2342342343,79.2343243434')
         $http.get(BASE_HTTP_API_URL + 'polls/' + center.lat + ',' + center.lng)
         .success(function(response){
             deffered.resolve(response);

@@ -23,8 +23,8 @@ var oPolls = [{
         "votes": 2
     }],
     "center": {
-        "lat": null,
-        "lng": null
+        "lat": "80.96441261702967",
+        "lng": "39.814570672728664"
     },
     "radius": 500,
     "timeout": null,

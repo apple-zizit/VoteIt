@@ -199,14 +199,13 @@ angular.module('voteit.controllers', [])
       //add user selection
       //model.choices[i].userIds = ['avner'];
 
-      console.info(model);
       // if (MOCK_MODE) {
 
       // } else {
 
         pollService.newPoll(model)
           .then(function(result) {
-            console.info(result);
+            console.info('new poll - success:' + result);
           }, function(err) {
             console.error(err);
           });
