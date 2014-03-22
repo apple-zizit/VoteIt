@@ -59,12 +59,12 @@ input, button, select, textarea, body, h1 {
   margin: auto;
 }
 
-#pollVotes .button-icon{
+#pollVotes .item-radio .button-icon{
   float: left;
   padding: 5px 0 0 10px;
 }
 
-#pollVotes .item-content{
+#pollVotes .item-radio .item-content{
   float: left;
 }
 

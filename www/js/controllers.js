@@ -121,54 +121,26 @@ angular.module('voteit.controllers', [])
 
     var oChoicesLockup = {};
     var choicesColors = oColors.slice(0); //shadow copy
-    for (var i = 0; i < pollVotesModel.poll.choices.length; i++) {
 
+    for (var i = 0; i < pollVotesModel.poll.choices.length; i++) {
 
       var colorId = Math.floor((Math.random()*choicesColors.length));     
 
       pollVotesModel.choices.push({
-          text: pollVotesModel.poll.choices[i],
+          text: pollVotesModel.poll.choices[i].text,
           color: choicesColors[colorId]
       });
        //choices colors lockup table
-      oChoicesLockup[pollVotesModel.poll.choices[i]] = choicesColors[colorId];
+      oChoicesLockup[pollVotesModel.poll.choices[i].text] = choicesColors[colorId];
       choicesColors.splice(colorId, 1);
     };
-
-    var getVotesDistinct = function(oVotes) {
-      var lookup = {};
-      var oVotesDistinct = [];
-
-      for (var i = 0; i < oVotes.length; i++) {
-        var vote = oVotes[i];
-
-        if (!(vote.choice in lookup)) {
-          lookup[vote.choice] = 1;
-          oVotesDistinct.push({
-            choice: vote.choice,
-            choiceCount: 1
-          });
-        } else {
-          lookup[vote.choice]++;
-        }
-      }
-
-      for (var i = 0; i < oVotesDistinct.length; i++) {
-        oVotesDistinct[i].choiceCount = lookup[oVotesDistinct[i].choice];
-      }
-
-      return oVotesDistinct;
-    }
-
-    // get distinct choices
-    pollVotesModel.distinctChoices = getVotesDistinct(pollVotesModel.poll.votes);
     
     // prepare the data for the graph
-    for (var i = 0; i < pollVotesModel.distinctChoices.length; i++) {
+    for (var i = 0; i < pollVotesModel.poll.choices.length; i++) {
       pollVotesModel.chartData.push(
       {
-          value : pollVotesModel.distinctChoices[i].choiceCount,
-          color : oChoicesLockup[pollVotesModel.distinctChoices[i].choice],
+          value : pollVotesModel.poll.choices[i].votes,
+          color : oChoicesLockup[pollVotesModel.poll.choices[i].text],
           label : '<%=value%>'
       });
     }
@@ -362,7 +334,7 @@ angular.module('voteit.controllers', [])
           type: 'button-assertive',
           onTap: function() {
             console.log('Thank you for voting');
-            $state.go('tab.poll-votes',{ "pollId": 1});
+            $state.go('tab.poll-votes',{ "pollId": 3});
             return true;
           }
         },

@@ -6,9 +6,8 @@
         {{pollVotesModel.poll.question}}
       </div>
       <div class="list">
- 
-        <label class="item item-radio" ng-repeat="choice in pollVotesModel.choices">
-
+        <!-- active poll -->
+        <label class="item item-radio" ng-repeat="choice in pollVotesModel.choices" ng-show="pollVotesModel.active">
           <input type="radio" name="group">
           <a class="button button-icon icon ion-stop" style="color:{{choice.color}}"></a>
           <div class="item-content">
@@ -24,6 +23,16 @@
             Vote It !
           </button>
         </label>
+        <!-- ended poll -->
+         <label class="item item-icon-left item-icon-right" ng-repeat="choice in pollVotesModel.choices" ng-show="!pollVotesModel.active">
+          <a class="icon ion-stop" style="color:{{choice.color}}"></a>
+          <div class="item-content">
+            {{choice.text}}
+          </div>
+          <a class="icon ion-android-star energized" ng-show="choice.text===pollVotesModel.poll.selected"></a>
+        </label>
+  
+
         <div class="item item-divider">
           <div class="row">
             <div class="col col-10">
@@ -46,7 +55,7 @@
     </div>
     <div class="card">
       <div class="item item-divider">
-        Total votes: {{pollVotesModel.poll.votes.length}}
+        Total votes: {{pollVotesModel.poll.totalVotes}}
       </div>
       <label class="item item-input">
         <chartjs width="pollVotesModel.chartwidth" height="pollVotesModel.chartHeight" data="pollVotesModel.chartData" options="pollVotesModel.chartOptions" is-type="Doughnut">
