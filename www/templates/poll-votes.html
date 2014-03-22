@@ -17,7 +17,7 @@
           <i class="radio-icon ion-checkmark">
           </i>
         </label>
-        <label class="item item-input">
+        <label class="item item-input" ng-show="pollVotesModel.active">
           <button class="button icon ion-plus button-energized"></button>
           &nbsp;
            <button class="button button-block button-assertive">
@@ -33,8 +33,11 @@
             <div class="col col-30">
               Time Left:
             </div>
-            <div class="col ">
+            <div class="col" ng-show="pollVotesModel.active">
               5 Minutes
+            </div>
+            <div class="col assertive" ng-show="!pollVotesModel.active">
+              Poll Ended
             </div>
           </div>
         </div>

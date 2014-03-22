@@ -102,7 +102,7 @@ angular.module('voteit.services', [])
       //return oGrougps;
       return getGroupsDistinct(center);
     },
-    getPolls: function(groupName) {
+    getPolls: function(groupName, userId) {
    
       var polls = [];
       for (var i = 0; i < oPolls.length; i++) {

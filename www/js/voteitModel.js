@@ -57,7 +57,9 @@
             lng: null
         },
         radius: 500,
-        timeout: null
+        timeout: null,
+        //calculated Values
+        active: true //should be calculated according to expiration date
     },
     {
         id: "2",

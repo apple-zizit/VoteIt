@@ -41,20 +41,41 @@ angular.module('voteit.controllers', [])
 //  Polls of groups
 //----------------------------------------------------------------------------
 .controller('PollsInGroupCtrl', function($scope, $stateParams, MockService) {
+
+    var pollInGroupModel = {
+        all: [],    //Avner: this is not good, it duplicate
+        active: [],
+        ended: []
+    }
+
+    $scope.pollInGroupModel = pollInGroupModel;
+
+
     $scope.groupName = $stateParams.groupName;
 
    if (MOCK_MODE) {
-        $scope.polls = MockService.getPolls($scope.groupName);
+        pollInGroupModel.all = MockService.getPolls($scope.groupName);
     }
     else {
         pollService.getPolls(center)
         .then(function(result){
             console.info(result);
-            $scope.groups = result;
+            pollInGroupModel.all = result;
         }, function(err){
             console.error(err);
-            $scope.polls = MockService.getPolls($scope.groupName);
+            pollInGroupModel.all = MockService.getPolls($scope.groupName);
         });     
+    }
+
+    //divide to active and ended
+    for (var i = 0; i < pollInGroupModel.all.length; i++) {
+        if (pollInGroupModel.all[i].active) {
+          pollInGroupModel.active.push(pollInGroupModel.all[i]);
+        }
+        else
+        {
+          pollInGroupModel.ended.push(pollInGroupModel.all[i]);
+        }
     }
 
 })
@@ -72,8 +93,10 @@ angular.module('voteit.controllers', [])
       chartwidth: "100%",
       chartHeight: 80,
       chartOptions: oGraphOptions,
-      chartData: []
+      chartData: [],
+      active: true
     }
+
 
     $scope.pollVotesModel = pollVotesModel;
 
@@ -91,7 +114,11 @@ angular.module('voteit.controllers', [])
         });     
     }
 
-   
+    //check if still active
+    if (!pollVotesModel.poll.active || pollVotesModel.poll.active === false) {
+        pollVotesModel.active = false;
+    };
+
     var oChoicesLockup = {};
     var choicesColors = oColors.slice(0); //shadow copy
     for (var i = 0; i < pollVotesModel.poll.choices.length; i++) {
@@ -301,13 +328,37 @@ angular.module('voteit.controllers', [])
       debugModel.geoPosition.Longitude = $rootScope.currentLocation.longitude;
     };
 
-    $scope.showAlert = function() {
+    $scope.showNewPollMessage = function() {
       $ionicPopup.show({
         title: 'New Poll !',
         content: 'A new poll was submitted, whould like to join the vote ?',
         scope: $scope,
         buttons: [{
           text: 'Vote it !',
+          type: 'button-assertive',
+          onTap: function() {
+            console.log('Thank you for voting');
+            $state.go('tab.poll-votes',{ "pollId": 1});
+            return true;
+          }
+        },
+        {
+          text: 'Not now',
+          type: 'button-light',
+          onTap: function() {
+            return true;
+          }
+        }]
+      });
+    };
+
+    $scope.showPollEndedMessage = function() {
+      $ionicPopup.show({
+        title: 'Poll voting ended !',
+        content: 'A poll you voted for has now ended (In the Ninja Coders groups). do you want to see the results ?',
+        scope: $scope,
+        buttons: [{
+          text: 'Show Me',
           type: 'button-assertive',
           onTap: function() {
             console.log('Thank you for voting');
