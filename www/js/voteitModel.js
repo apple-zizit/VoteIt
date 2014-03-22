@@ -1,49 +1,4 @@
 
-
-    var oVotesRadious = [{
-            userId: null,
-            choice: 'Yes'
-        }, {
-            userId: null,
-            choice: 'No'
-        }, 
-        {
-            userId: null,
-            choice: 'Yes'
-        }, 
-        {
-            userId: null,
-            choice: 'Yes'
-        }, 
-        {
-            userId: null,
-            choice: 'Just for the demo'
-        }];
-
-    var oVotesTheme = [{
-            userId: null,
-            choice: null
-        }, {
-            userId: null,
-            choice: null
-        }, 
-        {
-            userId: null,
-            choice: null
-        }, 
-        {
-            userId: null,
-            choice: null
-        }, 
-        {
-            userId: null,
-            choice: null
-        }, 
-        {
-            userId: null,
-            choice: null
-        }];
-
     var oPolls = [
     {
         id: "1",
@@ -162,15 +117,72 @@
         group: "Mobility Inovation",
         category: 'ion-speakerphone',
         question: 'Who should win the proximiton ?',
-        choices: [],
-        votes: [{
-            userId: null,
-            choice: null
-        }],
+        choices: [{
+            text: 'Vote It !',
+            userIds: [], //this is actually the number of votes for this choice
+            //calculated
+            votes: 64
+        },
+        {
+            text: 'Other team',
+            userIds: [], //this is actually the number of votes for this choice
+            //calculated
+            votes: 0
+        }],            
         center: {
             lat: null,
             lng: null
         },
         radius: 500,
-        timeout: null
+        timeout: null,
+        active: true,
+        totalVotes: 64,
     }];
+
+
+
+
+
+    // var oVotesRadious = [{
+    //         userId: null,
+    //         choice: 'Yes'
+    //     }, {
+    //         userId: null,
+    //         choice: 'No'
+    //     }, 
+    //     {
+    //         userId: null,
+    //         choice: 'Yes'
+    //     }, 
+    //     {
+    //         userId: null,
+    //         choice: 'Yes'
+    //     }, 
+    //     {
+    //         userId: null,
+    //         choice: 'Just for the demo'
+    //     }];
+
+    // var oVotesTheme = [{
+    //         userId: null,
+    //         choice: null
+    //     }, {
+    //         userId: null,
+    //         choice: null
+    //     }, 
+    //     {
+    //         userId: null,
+    //         choice: null
+    //     }, 
+    //     {
+    //         userId: null,
+    //         choice: null
+    //     }, 
+    //     {
+    //         userId: null,
+    //         choice: null
+    //     }, 
+    //     {
+    //         userId: null,
+    //         choice: null
+    //     }];

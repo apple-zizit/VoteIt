@@ -295,6 +295,10 @@ angular.module('voteit.controllers', [])
 
     $scope.model = debugModel;
 
+    $scope.start = function () {  
+        $state.go('intro');
+    };
+
     $scope.getLocation = function () {  
       debugModel.geoPosition.Latitude = $rootScope.currentLocation.latitude;
       debugModel.geoPosition.Longitude = $rootScope.currentLocation.longitude;

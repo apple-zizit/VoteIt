@@ -1,5 +1,10 @@
 /* Your app's CSS, go crazy, make it your own */
 
+#splash{
+  width: 100%;
+  height: 100%;
+}
+
 .ionic-logo {
   display: block;
   margin: 15px auto;
