@@ -1,44 +1,57 @@
-<!--
-This template loads for the 'tab.about' state (app.js)
--->
+
 <ion-view title="Settings screen"  >
-<ion-content has-header="true" has-tabs="true" padding="true">
-
-<div class="list list-inset">
-
-
-  <label class="item item-input">
-    <input type="text" placeholder="Name" ng-model="model.user.username">
-  </label>
-  <label class="item item-input">
-    <input type="text" placeholder="Password" ng-model="model.user.password">
-  </label>
-
-  <button class="button button-assertive button-block" ng-click="login()">Login</button>
-</div>
-
-<div class="list">
-  <div class="item item-divider">
-    Groups
-  </div>
-  <ul class="list">
-
-    <li class="item item-checkbox">
-      <label class="checkbox">
-        <input type="checkbox">
+  <ion-content has-header="true" has-tabs="true" padding="true">
+    
+    <div class="list list-inset">
+      
+      
+      <label class="item item-input">
+        <input type="text" placeholder="Name" ng-model="model.user.username">
       </label>
-      Group#1
-    </li>
-
-    <li class="item item-checkbox">
-      <label class="checkbox">
-        <input type="checkbox">
+      <label class="item item-input">
+        <input type="text" placeholder="Password" ng-model="model.user.password">
       </label>
-      Group#2
-    </li>
+      
+      <button class="button button-assertive button-block" ng-click="login()">
+        Login
+      </button>
+    </div>
+    
+    <div class="list">
+      <div class="item item-divider">
+        Select groups:
+      </div>
+      <ul class="list">
+        <li class="item item-checkbox">
+          <label class="checkbox checkbox-energized">
+            <input type="checkbox" checked >
+          </label>
+          VoteIt team
+        </li>
+        
+        <li class="item item-checkbox ">
+          <label class="checkbox checkbox-energized">
+            <input type="checkbox" checked>
+          </label>
+          Ninja Coders
+        </li>
+        
+        <li class="item item-checkbox">
+          <label class="checkbox checkbox-energized">
+            <input type="checkbox">
+          </label>
+           Some boring group
+        </li>
+        
+        <li class="item item-checkbox">
+          <label class="checkbox checkbox-energized">
+            <input type="checkbox" checked>
+          </label>
+          Mobility Inovation
+        </li>
 
-  </ul>
-</div>
-
-</ion-content>
+      </ul>
+    </div>
+    
+  </ion-content>
 </ion-view>
