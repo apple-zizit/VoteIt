@@ -11,7 +11,7 @@
     <div class="item item-divider" ng-show="pollInGroupModel.active.length>0">
       Active Polls
     </div>
-    <a class="item" href="#/tab/poll-votes/{{poll.id}}" ng-repeat="poll in pollInGroupModel.active">
+    <a class="item" href="#/tab/poll-votes/{{poll._id}}" ng-repeat="poll in pollInGroupModel.active">
       {{poll.question}}
        <span class="badge badge-assertive">{{poll.totalVotes}}</span>
     </a>
@@ -19,7 +19,7 @@
     <div class="item item-divider" ng-show="pollInGroupModel.ended.length>0">
       Ended Polls
     </div>
-    <a class="item" href="#/tab/poll-votes/{{poll.id}}" ng-repeat="poll in pollInGroupModel.ended">
+    <a class="item" href="#/tab/poll-votes/{{poll._id}}" ng-repeat="poll in pollInGroupModel.ended">
       {{poll.question}}
        <span class="badge badge-assertive">{{poll.totalVotes}}</span>
     </a>

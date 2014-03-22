@@ -2,7 +2,15 @@
 <ion-view title="Debug" id="debugView" >
   <ion-content has-header="true" has-tabs="true" padding="true">
 	<div class="list">
-      
+ 
+
+    <div class="item item-checkbox">
+      <label class="checkbox checkbox-balanced">
+        <input type="checkbox" ng-model="debugModel.mock" ng-click="changeMockMode()">
+      </label>
+        Mock Mode
+      </div>
+
       <div class="item item-button-right">
         New Poll (Demo)
         <button class="button button-balanced" ng-click="showNewPollMessage()">
@@ -30,7 +38,7 @@
             Latitude
           </div>
           <div class="col">
-            {{model.geoPosition.Latitude}}
+            {{debugModel.geoPosition.Latitude}}
           </div>
         </div>
         <div class="row">
@@ -38,7 +46,7 @@
             Longitude
           </div>
           <div class="col">
-            {{model.geoPosition.Longitude}}
+            {{debugModel.geoPosition.Longitude}}
           </div>
         </div>
       </div>

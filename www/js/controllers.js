@@ -5,9 +5,8 @@ angular.module('voteit.controllers', [])
 //----------------------------------------------------------------------------
 //  Groups
 //----------------------------------------------------------------------------
-.controller('PollGropsCtrl', function($scope, $rootScope, $stateParams, pollService, MockService) {
-    $scope.header = "pollit"
-
+.controller('PollGropsCtrl', function($scope, $rootScope, $stateParams, pollService) {
+ 
     var  center =  {
         lat: '30.2342342343',
         lng: '79.2343243434'
@@ -22,25 +21,20 @@ angular.module('voteit.controllers', [])
         center.lng = '79.2343243434';
     }
 
-    if (MOCK_MODE) {
-        $scope.groups = MockService.getGroups(center);
-    }
-    else {
-        pollService.getGroupsByGeoLocation(center)
-        .then(function(result){
-            console.info(result);
-            $scope.groups = result;
-        }, function(err){
-            console.error(err);
-            $scope.groups = MockService.getGroups();
-        });     
-    }
+    pollService.getGroupsByGeoLocation(center)
+    .then(function(result){
+        console.info(result);
+        $scope.groups = result;
+    }, function(err){
+        console.error(err);
+    });     
+
 })
 
 //----------------------------------------------------------------------------
 //  Polls of groups
 //----------------------------------------------------------------------------
-.controller('PollsInGroupCtrl', function($scope, $stateParams, MockService) {
+.controller('PollsInGroupCtrl', function($scope, $stateParams, pollService) {
 
     var pollInGroupModel = {
         all: [],    //Avner: this is not good, it duplicate
@@ -53,37 +47,36 @@ angular.module('voteit.controllers', [])
 
     $scope.groupName = $stateParams.groupName;
 
-   if (MOCK_MODE) {
-        pollInGroupModel.all = MockService.getPolls($scope.groupName);
-    }
-    else {
-        pollService.getPolls(center)
-        .then(function(result){
-            console.info(result);
-            pollInGroupModel.all = result;
-        }, function(err){
-            console.error(err);
-            pollInGroupModel.all = MockService.getPolls($scope.groupName);
-        });     
-    }
+    pollService.getPolls($scope.groupName)
+    .then(function(result){
+        console.info(result);
+        pollInGroupModel.all = result;
+        divideToActiveAndEnded();
+    }, function(err){
+        console.error(err);
+    });     
+
 
     //divide to active and ended
-    for (var i = 0; i < pollInGroupModel.all.length; i++) {
-        if (pollInGroupModel.all[i].active) {
-          pollInGroupModel.active.push(pollInGroupModel.all[i]);
-        }
-        else
-        {
-          pollInGroupModel.ended.push(pollInGroupModel.all[i]);
-        }
+    var divideToActiveAndEnded = function  () {
+      for (var i = 0; i < pollInGroupModel.all.length; i++) {
+          if (pollInGroupModel.all[i].active) {
+            pollInGroupModel.active.push(pollInGroupModel.all[i]);
+          }
+          else
+          {
+            pollInGroupModel.ended.push(pollInGroupModel.all[i]);
+          }
+      }     
     }
+ 
 
 })
 
 //----------------------------------------------------------------------------
 //  votes of a poll
 //----------------------------------------------------------------------------
-.controller('PollVotesCtrl', function($scope, $stateParams, MockService) {
+.controller('PollVotesCtrl', function($scope, $stateParams, pollService) {
 
     var pollVotesModel = {
       poll: null,
@@ -97,26 +90,22 @@ angular.module('voteit.controllers', [])
       active: true
     }
 
-
     $scope.pollVotesModel = pollVotesModel;
 
-    if (MOCK_MODE) {
-        pollVotesModel.poll = MockService.getPoll($stateParams.pollId);
-    }
-    else {
-        pollService.getPoll(center)
-        .then(function(result){
-            console.info(result);
-            pollVotesModel.poll = result;
-        }, function(err){
-            console.error(err);
-            pollVotesModel.poll = MockService.getPoll($stateParams.pollId);
-        });     
-    }
+    pollService.getPoll($stateParams.pollId)
+    .then(function(result){
+        console.info(result);
+        pollVotesModel.poll = result;
+        renderVotes();
+    }, function(err){
+        console.error(err);
+    });     
+ 
 
+  var renderVotes = function() {
     //check if still active
     if (!pollVotesModel.poll.active || pollVotesModel.poll.active === false) {
-        pollVotesModel.active = false;
+      pollVotesModel.active = false;
     };
 
     var oChoicesLockup = {};
@@ -124,26 +113,26 @@ angular.module('voteit.controllers', [])
 
     for (var i = 0; i < pollVotesModel.poll.choices.length; i++) {
 
-      var colorId = Math.floor((Math.random()*choicesColors.length));     
+      var colorId = Math.floor((Math.random() * choicesColors.length));
 
       pollVotesModel.choices.push({
-          text: pollVotesModel.poll.choices[i].text,
-          color: choicesColors[colorId]
+        text: pollVotesModel.poll.choices[i].text,
+        color: choicesColors[colorId]
       });
-       //choices colors lockup table
+      //choices colors lockup table
       oChoicesLockup[pollVotesModel.poll.choices[i].text] = choicesColors[colorId];
       choicesColors.splice(colorId, 1);
     };
-    
+
     // prepare the data for the graph
     for (var i = 0; i < pollVotesModel.poll.choices.length; i++) {
-      pollVotesModel.chartData.push(
-      {
-          value : pollVotesModel.poll.choices[i].votes,
-          color : oChoicesLockup[pollVotesModel.poll.choices[i].text],
-          label : '<%=value%>'
+      pollVotesModel.chartData.push({
+        value: pollVotesModel.poll.choices[i].votes,
+        color: oChoicesLockup[pollVotesModel.poll.choices[i].text],
+        label: '<%=value%>'
       });
     }
+  }
 
 })
 
@@ -279,10 +268,23 @@ angular.module('voteit.controllers', [])
         geoPosition: {
             Latitude: '0.0',
             Longitude: '0.0'
-        }
+        },
+        mock: false
+
     }
 
-    $scope.model = debugModel;
+    $scope.debugModel = debugModel;
+
+    if ($rootScope.mockMode) {
+      debugModel.mock = $rootScope.mockMode;  
+    };
+
+    
+
+    $scope.changeMockMode = function () {
+      debugModel.mock = !debugModel.mock;
+      $rootScope.mockMode =  debugModel.mock;
+    }
 
     $scope.start = function () {  
         $state.go('intro');

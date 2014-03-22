@@ -1,5 +1,5 @@
 var oPolls = [{
-    "id": "1",
+    "_id": "1",
     "group": "VoteIt team",
     "category": "ion-beer",
     "question": "Should we limit the radius ?",
@@ -23,15 +23,15 @@ var oPolls = [{
         "votes": 2
     }],
     "center": {
-        "lat": "80.96441261702967",
-        "lng": "39.814570672728664"
+        "lat": '80.96441261702967',
+        "lng": '39.814570672728664'
     },
     "radius": 500,
     "timeout": null,
     "active": true,
     "totalVotes": 9
 }, {
-    "id": "2",
+    "_id": "2",
     "group": "VoteIt team",
     "category": "ion-beer",
     "question": "UI Theme, Red or Green ?",
@@ -64,7 +64,7 @@ var oPolls = [{
     "totalVotes": 8,
     "selected": "Red"
 }, {
-    "id": "3",
+    "_id": "3",
     "group": "VoteIt team",
     "category": "ion-beer",
     "question": "Android or IOS ?",
@@ -96,25 +96,34 @@ var oPolls = [{
     "totalVotes": 52,
     "selected": "Phonegap"
 }, {
-    "id": "4",
+    "_id": "4",
     "group": "Ninja Coders",
     "category": "ion-social-tux",
     "question": "Which framework is the best",
-    "choices": [
-
-    ],
-    "votes": [{
-        "userId": null,
-        "choice": null
+    "choices": [{
+        "text": "AngularJs",
+        "userIds": [],
+        "votes": 23
+    }, {
+        "text": "Ember",
+        "userIds": [],
+        "votes": 22
+    }, {
+        "text": "Backbone",
+        "userIds": [],
+        "votes": 67
     }],
     "center": {
         "lat": null,
         "lng": null
     },
     "radius": 500,
-    "timeout": null
+    "timeout": null,
+    "active": false,
+    "totalVotes": 112,
+    "selected": "AngularJs"
 }, {
-    "id": "5",
+    "_id": "5",
     "group": "Mobility Inovation",
     "category": "ion-speakerphone",
     "question": "Who should win the proximiton ?",
@@ -140,49 +149,3 @@ var oPolls = [{
     "active": true,
     "totalVotes": 64
 }];
-
-
-
-// var oVotesRadious = [{
-//         userId: null,
-//         choice: 'Yes'
-//     }, {
-//         userId: null,
-//         choice: 'No'
-//     }, 
-//     {
-//         userId: null,
-//         choice: 'Yes'
-//     }, 
-//     {
-//         userId: null,
-//         choice: 'Yes'
-//     }, 
-//     {
-//         userId: null,
-//         choice: 'Just for the demo'
-//     }];
-
-// var oVotesTheme = [{
-//         userId: null,
-//         choice: null
-//     }, {
-//         userId: null,
-//         choice: null
-//     }, 
-//     {
-//         userId: null,
-//         choice: null
-//     }, 
-//     {
-//         userId: null,
-//         choice: null
-//     }, 
-//     {
-//         userId: null,
-//         choice: null
-//     }, 
-//     {
-//         userId: null,
-//         choice: null
-//     }];

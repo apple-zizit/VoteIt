@@ -113,10 +113,10 @@ angular.module('voteit.services', [])
   
       return polls;
     },
-    getPoll: function(iPollId) {
+    getPoll: function(sPollId) {
    
       for (var i = 0; i < oPolls.length; i++) {
-        if (oPolls[i].id===iPollId) {
+        if (oPolls[i]._id===sPollId) {
             return oPolls[i];
         }
       }
@@ -128,7 +128,7 @@ angular.module('voteit.services', [])
 
   }
 })
-.service('usersService', function($q, $http){
+.service('usersService', function($q, $http, MockService){
     return {
       register: function(user){
         var deffered = $q.defer();
@@ -145,34 +145,8 @@ angular.module('voteit.services', [])
       }
     }
 })
-.service('pollService', function($q, $http){
+.service('pollService', function($q, $http, MockService){
     return {
-      getGroupsByGeoLocation: function(center){
-        var deffered = $q.defer();
-        //http://localhost:3000/api/groups/30.2342342343,79.2343243434
-        //$http.get(BASE_HTTP_API_URL + 'groups/30.2342342343,79.2343243434')
-        $http.get(BASE_HTTP_API_URL + 'groups/' + center.lat + ',' + center.lng)
-        .success(function(response){
-            deffered.resolve(response);
-        })
-        .error(function(err){
-            deffered.reject(err);
-        });
-
-        return deffered.promise;
-      },       
-      getGroupsByGeoLocation: function(center){
-        var deffered = $q.defer();
-        $http.get(BASE_HTTP_API_URL + 'polls/' + center.lat + ',' + center.lng)
-        .success(function(response){
-            deffered.resolve(response);
-        })
-        .error(function(err){
-            deffered.reject(err);
-        });
-
-        return deffered.promise;
-      },       
       newPoll: function(newPoll){
         var deffered = $q.defer();
 
@@ -186,10 +160,15 @@ angular.module('voteit.services', [])
 
         return deffered.promise;
       }, 
-      getPoll: function(vote){
+      getGroupsByGeoLocation: function(center){
         var deffered = $q.defer();
+  
+        if (MOCK_MODE) {
+          deffered.resolve(MockService.getGroups(center));
+          return deffered.promise;
+        }
 
-        $http.post(BASE_HTTP_API_URL + 'polls/vote', newVote)
+        $http.get(BASE_HTTP_API_URL + 'groups/' + center.lat + ',' + center.lng)
         .success(function(response){
             deffered.resolve(response);
         })
@@ -198,7 +177,45 @@ angular.module('voteit.services', [])
         });
 
         return deffered.promise;
-      }
+      },       
+      getPolls: function(groupName, userId) {
+
+        var deffered = $q.defer();
+
+        if (MOCK_MODE) {
+            deffered.resolve(MockService.getPolls(groupName, userId));
+            return deffered.promise;
+        }
+
+        $http.get(BASE_HTTP_API_URL + 'polls?groupName=' + groupName)
+        .success(function(response){
+            deffered.resolve(response);
+        })
+        .error(function(err){
+            deffered.reject(err);
+        });
+
+        return deffered.promise;
+      },  
+      getPoll: function(sPollId) {
+
+        var deffered = $q.defer();
+
+        if (MOCK_MODE) {
+            deffered.resolve(MockService.getPoll(sPollId));
+            return deffered.promise;
+        }
+
+        $http.get(BASE_HTTP_API_URL + 'poll?pollId=' + sPollId)
+        .success(function(response){
+            deffered.resolve(response);
+        })
+        .error(function(err){
+            deffered.reject(err);
+        });
+
+        return deffered.promise;
+      }  
 
 
     }
