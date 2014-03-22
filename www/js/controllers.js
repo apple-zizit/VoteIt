@@ -230,7 +230,7 @@ angular.module('voteit.controllers', [])
     $scope.showAlert = function() {
       $ionicPopup.show({
         title: 'Poll it ! Mannn',
-        content: 'Congratulations, your poll is created and is on his way to the voters.',
+        content: 'Congratulations, "VoteIt" will broadcast your poll to all the potential voters.',
         scope: $scope,
         buttons: [{
           text: 'Ok',
@@ -243,6 +243,7 @@ angular.module('voteit.controllers', [])
         }]
       });
     };
+
 
 })
 
