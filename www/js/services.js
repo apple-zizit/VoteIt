@@ -1,6 +1,6 @@
 //"use strict";
 
-var BASE_HTTP_API_URL = 'http://10.114.20.244:3000/api/'
+
 
 angular.module('voteit.services', [])
 .service('locationService', function($rootScope, $interval) {
@@ -178,7 +178,7 @@ angular.module('voteit.services', [])
       newPoll: function(newPoll){
         var deffered = $q.defer();
 
-        $http.post(BASE_HTTP_API_URL + 'polls', newPoll)
+        $http.post(BASE_HTTP_API_URL + 'createpoll', newPoll)
         .success(function(response){
             deffered.resolve(response);
         })

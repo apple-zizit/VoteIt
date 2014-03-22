@@ -1,3 +1,6 @@
+//var BASE_HTTP_API_URL = 'http://10.114.20.244:3000/api/';
+var BASE_HTTP_API_URL = 'http://localhost:9000/api/'; //
+
   var MOCK_MODE = true;
 
   var oGraphOptions = {

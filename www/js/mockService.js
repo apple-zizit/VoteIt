@@ -1,4 +1,41 @@
-// angular.module('voteit.services', [])
-// .service('MockService2', function() {
- 
-// });
+{
+   "group":"sfasdf",
+   "category":"ion-beer",
+   "question":"sadfasd",
+   "choices":[
+      {
+         "text":"sdfsadf",
+         "$$hashKey":"00M"
+      },
+      {
+         "text":"sdfasdf",
+         "$$hashKey":"00N"
+      }
+   ],
+   "center":{
+      "lat":"30.2342342343",
+      "lng":"79.2343243434"
+   },
+   "radius":500,
+   "timeout":null,
+   "allowToAddChoices":true
+}
+
+{
+   "group":"sfasdf",
+   "category":"ion-beer",
+   "question":"sadfasd",
+   "choices":[
+      {
+         "text":"sdfsadf",
+         "$$hashKey":"00M"
+      },
+      {
+         "text":"sdfasdf",
+         "$$hashKey":"00N"
+      }
+   ],
+   "radius":500,
+   "timeout":null,
+   "allowToAddChoices":true
+}

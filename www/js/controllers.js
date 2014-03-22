@@ -156,30 +156,17 @@ angular.module('voteit.controllers', [])
         group: null,
         category: 'ion-beer',
         question: '',
-        choices: [],
-        votes: [{
-            userId: null,
-            choice: null
-        }],
+        choices: [{text: ''}, {text: ''}],
         center: {
             lat: null,
             lng: null
         },
         radius: 500,
-        timeout: null
-    }
-
-    var uiModel = {
+        timeout: null,
         allowToAddChoices: true,
-        choices: [{
-            text: ''
-        }, {
-            text: ''
-        }]
     }
 
     $scope.model = model;
-    $scope.uiModel = uiModel;
 
     if ($rootScope.currentLocation) {
         model.center.lat = $rootScope.currentLocation.latitude;
@@ -192,28 +179,30 @@ angular.module('voteit.controllers', [])
 
 
     $scope.addChoice = function () {
-        uiModel.choices.push({
+        model.choices.push({
             text: ''
         });
-        if (uiModel.choices.length > 4) {
-            uiModel.allowToAddChoices = false;
+        if (model.choices.length > 4) {
+            model.allowToAddChoices = false;
         };
     };
 
     $scope.createPoll = function () {
 
-      for (var i = 0; i < uiModel.choices.length; i++) {
-        if (uiModel.choices[i].text.length === 0) {
+      for (var i = 0; i < model.choices.length; i++) {
+        if (model.choices[i].text.length === 0) {
           alert('No choice for blank choices  !!!');
           return;
         }
-        model.choices.push(uiModel.choices[i].text);
       }
 
-      console.info(model);
-      if (MOCK_MODE) {
+      //add user selection
+      //model.choices[i].userIds = ['avner'];
 
-      } else {
+      console.info(model);
+      // if (MOCK_MODE) {
+
+      // } else {
 
         pollService.newPoll(model)
           .then(function(result) {
@@ -221,7 +210,7 @@ angular.module('voteit.controllers', [])
           }, function(err) {
             console.error(err);
           });
-      }
+      // }
       $scope.showAlert();
       
     }
