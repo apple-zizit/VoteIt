@@ -126,7 +126,7 @@ var oPolls = [{
     "_id": "5",
     "group": "Mobility Inovation",
     "category": "ion-speakerphone",
-    "question": "Who should win the proximiton ?",
+    "question": "Who should win the Proximithon ?",
     "choices": [{
         "text": "Vote It !",
         "userIds": [
@@ -146,6 +146,6 @@ var oPolls = [{
     },
     "radius": 500,
     "timeout": null,
-    "active": true,
+    "active": false,
     "totalVotes": 64
 }];

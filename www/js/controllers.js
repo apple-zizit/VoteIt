@@ -76,7 +76,7 @@ angular.module('voteit.controllers', [])
 //----------------------------------------------------------------------------
 //  votes of a poll
 //----------------------------------------------------------------------------
-.controller('PollVotesCtrl', function($scope, $stateParams, pollService) {
+.controller('PollVotesCtrl', function($scope, $state, $stateParams, $ionicPopup, pollService) {
 
     var pollVotesModel = {
       poll: null,
@@ -132,6 +132,22 @@ angular.module('voteit.controllers', [])
         label: '<%=value%>'
       });
     }
+  }
+
+  $scope.userVote = function () {
+    $ionicPopup.show({
+        title: 'Thank you for voting',
+        content: 'A notification will be sent to your device when the poll is concludes',
+        scope: $scope,
+        buttons: [{
+          text: 'SABABA',
+          type: 'button-assertive',
+          onTap: function() {
+            $state.go('tab.groups');
+            return true;
+          }
+        }]
+      });  
   }
 
 })
