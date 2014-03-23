@@ -148,4 +148,80 @@ var oPolls = [{
     "timeout": null,
     "active": false,
     "totalVotes": 64
+}, {
+    "_id": "6",
+    "group": "My friends",
+    "category": "ion-speakerphone",
+    "question": "Who is your favorite super-hero?",
+    "choices": [{
+        "text": "Superman",
+        "userIds": [
+
+        ],
+        "votes": 5
+    }, {
+        "text": "Batman",
+        "userIds": [
+
+        ],
+        "votes": 2
+    }, {
+        "text": "Spider-Man",
+        "userIds": [
+
+        ],
+        "votes": 3
+    }, {
+        "text": "Wolverine",
+        "userIds": [
+
+        ],
+        "votes": 10
+    }],
+    "center": {
+        "lat": null,
+        "lng": null
+    },
+    "radius": 500,
+    "timeout": null,
+    "active": false,
+    "totalVotes": 20
+}, {
+    "_id": "7",
+    "group": "Mobility Inovation",
+    "category": "ion-speakerphone",
+    "question": "Where do u want to eat lunch?",
+    "choices": [{
+        "text": "Motorola",
+        "userIds": [
+
+        ],
+        "votes": 5
+    }, {
+        "text": "AudioCodes",
+        "userIds": [
+
+        ],
+        "votes": 2
+    }, {
+        "text": "Food Court ",
+        "userIds": [
+
+        ],
+        "votes": 3
+    }, {
+        "text": "Order Take-Away",
+        "userIds": [
+
+        ],
+        "votes": 10
+    }],
+    "center": {
+        "lat": null,
+        "lng": null
+    },
+    "radius": 500,
+    "timeout": null,
+    "active": false,
+    "totalVotes": 20
 }];
