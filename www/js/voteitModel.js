@@ -151,7 +151,7 @@ var oPolls = [{
 }, {
     "_id": "6",
     "group": "My friends",
-    "category": "ion-speakerphone",
+    "category": "ion-android-friends",
     "question": "Who is your favorite super-hero?",
     "choices": [{
         "text": "Superman",
