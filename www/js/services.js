@@ -146,6 +146,15 @@ angular.module('voteit.services', [])
     }
 })
 .service('pollService', function($q, $http, MockService){
+
+    var isServerMode = function () {
+      var server = localStorage.getItem("server") ;
+      if (server) {
+        return (server === 'true' ? true : false); 
+      }
+      return false;
+    }
+
     return {
       newPoll: function(newPoll){
         var deffered = $q.defer();
@@ -163,7 +172,7 @@ angular.module('voteit.services', [])
       getGroupsByGeoLocation: function(center){
         var deffered = $q.defer();
   
-        if (MOCK_MODE) {
+        if (!isServerMode() && MOCK_MODE) {
           deffered.resolve(MockService.getGroups(center));
           return deffered.promise;
         }
@@ -182,7 +191,7 @@ angular.module('voteit.services', [])
 
         var deffered = $q.defer();
 
-        if (MOCK_MODE) {
+        if (!isServerMode() && MOCK_MODE) {
             deffered.resolve(MockService.getPolls(groupName, userId));
             return deffered.promise;
         }

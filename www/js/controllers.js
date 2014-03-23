@@ -285,21 +285,20 @@ angular.module('voteit.controllers', [])
             Latitude: '0.0',
             Longitude: '0.0'
         },
-        mock: false
+        server: false
 
     }
 
     $scope.debugModel = debugModel;
 
-    if ($rootScope.mockMode) {
-      debugModel.mock = $rootScope.mockMode;  
-    };
-
-    
+    var server = localStorage.getItem("server") ;
+    if (server) {
+      debugModel.server = (server === 'true' ? true : false); 
+    }
 
     $scope.changeMockMode = function () {
-      debugModel.mock = !debugModel.mock;
-      $rootScope.mockMode =  debugModel.mock;
+      debugModel.server = !debugModel.server;
+      localStorage.setItem("server", debugModel.server ? 'true' : 'false');
     }
 
     $scope.start = function () {  
